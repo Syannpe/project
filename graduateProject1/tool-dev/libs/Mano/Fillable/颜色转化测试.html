@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+
+    </style>
+</head>
+<body>
+<script type="module">
+    import {Mano} from "../Mano.js";
+
+    document.addEventListener("DOMContentLoaded", function () {
+        const mano = new Mano();
+
+        const canvas = new Mano.Canvas({
+            height: 600,
+            width: 1400
+        });
+        const graphic = new Mano.Graphic();
+
+        const rect1 = new Mano.Graphic.Rect(0, 0, 600, 600);
+        const rect2 = new Mano.Graphic.Rect(700, 0, 600, 600);
+
+        const color = Mano.Color.MAGENTA;
+        rect1.backgroundColor = color;
+        rect2.backgroundColor = Mano.Color.RGBAToHSLA(color);
+
+        rect1.content = rect1.backgroundColor.type + ": " + rect1.backgroundColor.toString();
+        rect1.font = new Mano.Font({
+            font: "30px Arial",
+        });
+        rect1.color = Mano.Color.WHITE;
+        rect2.content = rect2.backgroundColor.type + ": " + rect2.backgroundColor.toString();
+        rect2.font = new Mano.Font({
+            font: "30px Arial",
+        })
+
+        graphic.appendChild(rect1);
+        graphic.appendChild(rect2);
+
+        mano.appendChild(canvas);
+        mano.appendChild(graphic);
+
+        document.body.appendChild(mano);
+    })
+</script>
+</body>
+</html>

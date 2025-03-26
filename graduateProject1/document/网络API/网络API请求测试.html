@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>网络请求列表</title>
+
+    <style>
+        body {
+            width: 100vw;
+            margin: 20px 0;
+            overflow-x: auto;
+            box-sizing: border-box;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 25px 0;
+            font-size: 18px;
+            min-width: 400px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        table thead tr {
+            background-color: #663399;
+            color: #ffffff;
+            text-align: left;
+            font-weight: bold;
+        }
+
+        table th,
+        table td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #dddddd;
+        }
+
+        table tbody tr {
+            border-bottom: 1px solid #dddddd;
+            transition: background-color 0.3s;
+        }
+
+        table tbody tr:nth-of-type(even) {
+            background-color: #f3f3f3;
+        }
+
+        table tbody tr:last-of-type {
+            border-bottom: 2px solid #663399;
+        }
+
+        table tbody tr.active-row {
+            font-weight: bold;
+            color: #663399;
+        }
+
+        table tbody tr:hover {
+            background-color: #f1f1f1;
+            cursor: pointer;
+        }
+
+        table thead th {
+            position: relative;
+        }
+
+        table thead th::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            height: 4px;
+            width: 100%;
+            background-color: silver;
+            transform: scaleX(0);
+            transition: transform 0.3s;
+        }
+
+        table thead th:hover::after {
+            transform: scaleX(1);
+        }
+
+        button {
+            background-color: #663399aa;
+            color: #ffffff;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 25px;
+            font-size: 16px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #663399;
+            box-shadow: 0 15px 20px rgba(0, 0, 0, 0.2);
+            transform: translateY(-2px);
+        }
+
+        button:active {
+            background-color: #663399;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+<h1>网络请求列表</h1>
+<div id="app"></div>
+
+<script type="module">
+    // import {networkAPI} from "../../src/config/networkAPI.json";
+
+    /*功能不完善，应该设计成响应式程序。*/
+    document.addEventListener("DOMContentLoaded", async function () {
+        const networkAPI = await (await fetch("../../src/config/networkAPI.json")).json();
+
+        //这里应该根据服务器设定及时更改
+        const protocol = "http://";
+        const domain = "localhost";
+        const port = ":80"
+
+        // API 请求对象的封装（面向对象设计）
+        class ApiRequest {
+            constructor(data) {
+                this.name = data.name;
+                this.url = data.url;
+                this.method = data.method;
+                this.desc = data.desc;
+                this.options = data.options;
+            }
+
+            // 根据不同的请求方式构造 fetch 参数
+            getFetchOptions() {
+                const fetchOptions = {
+                    method: this.method,
+                    headers: this.options.headers || {}
+                };
+                // 如果是GET请求则不传 body
+                if (this.method.toUpperCase() !== "GET" && this.options.body) {
+                    fetchOptions.body = this.options.body;
+                }
+                return fetchOptions;
+            }
+
+            // 发送请求
+            sendRequest() {
+                const options = this.getFetchOptions();
+                const url = protocol + domain + port + this.url + (this.method === "GET" ? "?" + this.options.body : "")
+                console.log(`正在发送请求：${this.method} ${url}`, options);
+
+                fetch(url, options)
+                    .then(response => response.text())
+                    .then(data => {
+                        console.log(`请求【${this.name}】返回数据：`, data);
+                        alert(`请求【${this.name}】返回数据：\n${data}`);
+                    })
+                    .catch(error => {
+                        console.error(`请求【${this.name}】失败：`, error);
+                        alert(`请求【${this.name}】失败：\n${error}`);
+                    });
+            }
+        }
+
+        // 表格渲染类（面向对象设计）
+        class TableRenderer {
+            constructor(apiList, containerId) {
+                // 将原始对象转换为 ApiRequest 实例
+                this.apiList = apiList.map(item => new ApiRequest(item));
+                this.container = document.getElementById(containerId);
+            }
+
+            render() {
+                if (!this.container) return;
+
+                // 获取所有列名称（取所有对象的 key，并合并 options 为 JSON 字符串）
+                const columns = ["name", "url", "method", "desc", "options"];
+
+                // 创建 table 元素
+                const table = document.createElement("table");
+                // 生成表头
+                const thead = document.createElement("thead");
+                const headRow = document.createElement("tr");
+                columns.forEach(col => {
+                    const th = document.createElement("th");
+                    th.textContent = col;
+                    headRow.appendChild(th);
+                });
+                // 添加操作列
+                const thAction = document.createElement("th");
+                thAction.textContent = "操作";
+                headRow.appendChild(thAction);
+                thead.appendChild(headRow);
+                table.appendChild(thead);
+
+                // 生成表格主体
+                const tbody = document.createElement("tbody");
+                this.apiList.forEach(api => {
+                    const row = document.createElement("tr");
+                    columns.forEach(col => {
+                        const td = document.createElement("td");
+                        // 对 options 对象，转换成 JSON 格式字符串显示
+                        let value = api[col];
+                        if (col === "options") {
+                            value = JSON.stringify(value);
+                        }
+                        td.textContent = value;
+                        row.appendChild(td);
+                    });
+                    // 操作按钮
+                    const tdAction = document.createElement("td");
+                    const btn = document.createElement("button");
+                    btn.textContent = "发送请求";
+                    // 使用事件绑定调用 ApiRequest 的 sendRequest 方法
+                    btn.addEventListener("click", () => {
+                        api.sendRequest();
+                    });
+                    tdAction.appendChild(btn);
+                    row.appendChild(tdAction);
+
+                    tbody.appendChild(row);
+                });
+                table.appendChild(tbody);
+                this.container.appendChild(table);
+            }
+        }
+
+        // 应用入口类
+        class App {
+            constructor(apiList, containerId) {
+                this.tableRenderer = new TableRenderer(apiList, containerId);
+            }
+
+            init() {
+                this.tableRenderer.render();
+            }
+        }
+
+        // 初始化应用
+        const app = new App(networkAPI, "app");
+        app.init();
+    })
+
+</script>
+</body>
+</html>

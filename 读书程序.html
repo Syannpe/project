@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        html, body {
+            padding: 0;
+            margin: 0;
+            height:100vh;
+        }
+
+        /*5270CA*/
+        /*EF77C1*/
+        .text-container {
+            height: calc(100vh);
+            width: 100vw;
+
+            writing-mode: vertical-rl;
+            text-combine-upright: none;
+            font-family: "楷体", "宋体";
+            line-height: 2.2em;
+            letter-spacing: .7em;
+
+            overflow-x: auto;
+
+            background-image: linear-gradient(to bottom right, #5270CA 0%,#90ADF1 20%, #E1CBFC 50%,#F39ADE 80%, #EF77C1 100%);
+            /*text-indent: -3em;*/
+        }
+
+        #text-container > span.digits {
+            text-combine-upright: all;
+        }
+    </style>
+</head>
+<body>
+<section class="text-container">
+    曰仁云“心犹镜也。圣人心如明镜，常人心如昏镜。近世格物之说，如以镜照物，照上用功，不知镜尚昏在，何能照？先生之格物，如磨镜而使之明，磨上用功，明了后亦未尝废照。”
+    <br/>
+    <br/>
+    问道之精粗。先生曰“道无精粗，人之所见有精粗。如这一间房，人初进来，只见一个大规模如此，处久，便柱壁之类一一看得明白，再就，如柱上有些文藻，细细都看得出来。然只是一间房。”
+    <br/>
+    <br/>
+    先生曰“诸公近见时少疑问，何也？人不用功，莫不自以为已知为学，只循而行之是矣。殊不知私欲日升，如地上尘，一日不扫便又有一层。着实用功，便见道无终穷，愈探愈深，必使精白无一毫不彻方可。”
+</section>
+
+<script type="module">
+    import {ZhConverse} from "../packages/zh-converse.js";
+
+    document.addEventListener("DOMContentLoaded", function () {
+        const textContainer = this.querySelectorAll(".text-container");
+
+
+        const zhConverse = new ZhConverse();
+        Array.from(textContainer).forEach(function (element) {
+            element.innerHTML = element.innerHTML.replace(/(\d+)/g, "<span class='digits'>$1</span>");
+            element.innerHTML = element.innerHTML.replace(/([：|，|。|！|?|﹗|、|？|；]+)/g, " ");
+            element.innerHTML = element.innerHTML.replace(/([《|〔|‘|“]+)/g, "「");
+            element.innerHTML = element.innerHTML.replace(/([》|〕|’|”]+)/g, "」");
+
+            element.innerHTML = zhConverse.s2t(element.innerHTML);
+
+            element.onwheel = function (ev) {
+                element.scroll(element.scrollLeft - ev.deltaY, 0);
+            }
+        });
+
+
+    });
+</script>
+</body>
+</html>

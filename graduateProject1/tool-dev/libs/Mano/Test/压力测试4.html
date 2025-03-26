@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        strong {
+            position: fixed;
+            top: 10px;
+            right: 40px;
+            font-size: 1em;
+            color: red;
+            z-index: 1;
+        }
+
+        div {
+            border: red solid 1px;
+            height: 100px;
+            width: 100px;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+    </style>
+</head>
+<body>
+<strong></strong>
+同时给100个矩形，然后给每个矩形设置一个动画，查看帧数
+<script type="module">
+    import {Mano} from "../Mano.js";
+
+    document.addEventListener("DOMContentLoaded", function () {
+        let p = performance;
+        console.log("start", p.now());
+
+        const div = this.querySelector("strong");
+        let counter = 0;
+        let lTime = 0;
+        let renderer = function (nTime) {        //执行函数的时间
+            counter++;
+            if (nTime - lTime >= 1000) {
+                div.innerHTML = "屏幕刷新速度为：" + counter + "fps";
+                counter = 0;
+                lTime = parseInt(nTime / 1000) * 1000;
+            }
+            requestAnimationFrame(renderer);
+        }
+        renderer(lTime);
+
+        for (let i = 0; i < 3700; i++) {
+            const div = document.createElement("div");
+            document.body.appendChild(div);
+
+            let animationEffect = new KeyframeEffect(div, [
+                {left: "0"},
+                {left: "1000px"},
+            ], {
+                duration: 5000,
+            });
+
+            let anime = new Animation(animationEffect, document.timeline);
+            anime.play();
+            //监听动画状态
+            // anime.ready.then(anime => console.log(anime, "动画准备结束"));
+            anime.finished.then(anime => console.log(anime, "动画已经结束" + i));
+
+        }
+
+        //动画帧数和图元个数的函数大约为：y-100=k(x-45)  k=(100-38)/(45-100)=-1.12727
+    });
+</script>
+</body>
+</html>

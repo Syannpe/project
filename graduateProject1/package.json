@@ -1,0 +1,16 @@
+{
+  "name": "graduateproject1",
+  "version": "1.0.0",
+  "description": "研究生横向项目1：社区网站",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Syannpe",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.21.2",
+    "tsc": "^2.0.4"
+  }
+}

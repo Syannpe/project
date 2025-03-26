@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style></style>
+</head>
+<body>
+绘制1e6个方块的速度
+<script type="module">
+    import {Mano} from "../Mano.js";
+
+    document.addEventListener("DOMContentLoaded", function () {
+        let p = performance;
+        let startTime = p.now();
+
+        console.log("开始时间为：", startTime);
+
+        const mano = new Mano();
+        const canvas = new Mano.Canvas({
+            height: 400,
+            width: 400,
+            enableFPS: true
+        });
+        const graphic = new Mano.Graphic();
+        mano.appendChild(canvas);
+        mano.appendChild(graphic);
+
+        console.log("基础架构构建完毕：", p.now());
+
+        let fragment = document.createDocumentFragment();
+        for (let i = 0; i < 1e4; i++) {
+            const rect = new Mano.Graphic.Rect(0, 0, 100, 100);
+            rect.fillType = Mano.FILL_TYPE.GRAPHIC_FILL;
+            rect.backgroundColor = new Mano.Color.RGBA(Math.random() * 255, Math.random() * 255, Math.random() * 255);
+            fragment.appendChild(rect);
+        }
+        graphic.appendChild(fragment);
+
+        console.log("所有正方体构建并添加时间：", p.now())
+
+        graphic.children[graphic.children.length - 1].addEventListener("manoafterrender", function () {
+            console.log("统共耗时", p.now() - startTime, "ms");
+        });
+        document.body.appendChild(mano);
+        //绘制时间随着绘制图像的数量的增加而增加，需要看看为什么
+
+
+        //备忘录，开始调查时间逐步增大的原因，是渲染函数所致，
+        // 而且单双数图元渲染时间有很大区别，需要看看为什么
+
+    })
+</script>
+</body>
+</html>

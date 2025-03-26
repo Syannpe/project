@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style></style>
+</head>
+<body>
+
+<script type="module">
+    import {Mano} from "./Mano.js";
+
+    document.addEventListener("DOMContentLoaded", function () {
+        let mano = new Mano();
+
+        let graphics = new Mano.Graphic;
+        mano.appendChild(graphics);
+
+        let rect = new Mano.Graphic.Rect(0, 0, 50, 50);
+        rect.fillType = Mano.FILL_TYPE.GRAPHIC_STROKE;
+        rect.content = "我是一个矩形";
+        graphics.appendChild(rect);
+
+        let roundrect = new Mano.Graphic.RoundRect(70, 0, 50, 50, 14);
+        roundrect.fillType = Mano.FILL_TYPE.GRAPHIC_STROKE;
+        roundrect.content = "圆框矩形";
+        graphics.appendChild(roundrect);
+
+        let ellipse = new Mano.Graphic.Ellipse(170, 25, 25, 40, Math.PI / 4, 0, 2 * Math.PI);
+        ellipse.backgroundColor = new Mano.Color.RGBA(0, 255, 0);
+        ellipse.fillType = Mano.FILL_TYPE.GRAPHIC_STROKE;
+        ellipse.content = "椭圆";
+        graphics.appendChild(ellipse);
+
+        let line = new Mano.Graphic.Line(230, 0, 270, 75);
+        line.backgroundColor = new Mano.Color.RGBA(0, 0, 255);
+        line.fillType = Mano.FILL_TYPE.GRAPHIC_STROKE;
+        line.content = "直线";
+        graphics.appendChild(line);
+
+        let arc = new Mano.Graphic.Arc(330, 30, 30, 0, 2 * Math.PI);
+        arc.backgroundColor = new Mano.Color.RGBA(255, 255, 0);
+        arc.content = "圆形";
+        graphics.appendChild(arc);
+
+        let arc2 = new Mano.Graphic.Arc2(200, 20, 200, 130, 50, 20, 40);
+        arc2.backgroundColor = new Mano.Color.RGBA(255, 0, 255);
+        arc2.fillType = Mano.FILL_TYPE.GRAPHIC_STROKE;
+        arc2.content = "圆弧";
+        arc2.boxTransform = arc2.boxTransform.translate(-120,60);
+        graphics.appendChild(arc2);
+
+        let bezierCurve = new Mano.Graphic.BezierCurve(100, 80, 115, 50, 140, 100, 150, 80);
+        bezierCurve.backgroundColor = new Mano.Color.RGBA(0, 255, 255);
+        bezierCurve.fillType = Mano.FILL_TYPE.GRAPHIC_STROKE;
+        bezierCurve.content = "贝塞尔曲线";
+        graphics.appendChild(bezierCurve);
+
+        let text = new Mano.Graphic.Text("文字", 170, 100, 100);
+        text.backgroundColor = new Mano.Color.RGBA(125, 255, 255);
+        graphics.appendChild(text);
+
+        const g = new Mano.Graphic.Group();
+        let arc22 = new Mano.Graphic.Arc2(200, 20, 200, 130, 50, 20, 40);
+        arc22.content = "分组下的圆弧";
+        arc22.fillType = Mano.FILL_TYPE.GRAPHIC_STROKE;
+        let ellipse2 = new Mano.Graphic.Ellipse(200, 100, 50, 30, 50, 20, 40);
+        ellipse2.content = "分组下的贝塞尔曲线";
+        ellipse2.fillType = Mano.FILL_TYPE.GRAPHIC_STROKE;
+        g.appendChild(arc22);
+        g.appendChild(ellipse2);
+        g.boxTransform = g.boxTransform.translate(50,50);
+        graphics.appendChild(g);
+
+        let canvas = new Mano.Canvas({
+            width: 500,
+            height: 500,
+            // clearColor:new Mano.Color.RGBA(),
+        });
+        mano.appendChild(canvas);
+        this.body.appendChild(mano);
+
+        // canvas.render();
+        let image = new Image();
+        image.src = "./测试用图片/2.png";
+        image.onload = function () {
+            let imageObject = new Mano.Graphic.Image({
+                image: image,
+                startX: 50,
+                startY: 150,
+            });
+            graphics.appendChild(imageObject);
+
+           /* let imageObject2 = new Mano.Graphic.Image({
+                image: image,
+                startX: 100,
+                startY: 150,
+                rectWidth: 100,
+                rectHeight: 100,
+            });
+            graphics.appendChild(imageObject2);
+
+            let imageObject3 = new Mano.Graphic.Image({
+                image: image,
+                startX: 200,
+                startY: 150,
+                rectWidth: 100,
+                rectHeight: 100,
+            });
+            imageObject3.imageSmoothingEnabled = false;
+            graphics.appendChild(imageObject3);*/
+        }
+
+    })
+</script>
+</body>
+</html>

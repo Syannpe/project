@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style></style>
+</head>
+<body>
+<strong></strong>
+<script type="module">
+    import {Mano} from "../Mano.js";
+
+    document.addEventListener("DOMContentLoaded", function () {
+        const mano = new Mano();
+        const canvas = new Mano.Canvas({
+            height: 800,
+            width: 400
+        });
+        const graphic = new Mano.Graphic();
+        mano.appendChild(canvas);
+        mano.appendChild(graphic);
+        this.body.appendChild(mano);
+
+        const image = new Image();
+        image.src = "../测试用图片/1.png";
+        image.onload = function () {
+            console.log(this);
+            let image1 = new Mano.Graphic.Image({
+                image: this,
+                startX: 0,
+                startY: 0,
+                rectWidth: 400,
+                rectHeight: 800
+            });
+            graphic.appendChild(image1);
+
+            image1.addEventListener("click", function (ev) {
+                let {x, y} = ev;
+
+                let font = new Mano.Graphic.Text("√", x, y);
+                font.font = new Mano.Font({
+                    font: "50px Source Code Pro"
+                });
+                font.color = Mano.COLOR_NAME.RED;
+                graphic.appendChild(font);
+            });
+            image1.addEventListener("mousemove", function (ev) {
+                console.log(ev)
+            })
+
+        }
+
+    })
+</script>
+</body>
+</html>

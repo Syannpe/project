@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script type="text/javascript">
+    document.addEventListener("DOMContentLoaded",function () {
+        let foo = function (){
+            //我处理body
+        }
+        let bar = function (){
+            //我也处理body
+        }
+        document.body.onclick = function (){
+            foo.call(this);
+            bar.call(this);
+        }
+    });
+</script>
+</body>
+</html>

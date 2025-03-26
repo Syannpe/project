@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        strong {
+            position: fixed;
+            top: 10px;
+            right: 40px;
+            font-size: 1em;
+            color: red;
+            z-index: 1;
+        }
+    </style>
+</head>
+<body>
+<strong></strong>
+<script type="module">
+    import {Mano} from "./Mano.js";
+
+    document.addEventListener("DOMContentLoaded", async function () {
+
+        const mano = new Mano();
+
+        const canvas = new Mano.Canvas({
+            height: 400,
+            width: 1000
+        });
+        mano.appendChild(canvas);
+
+        const graphic = new Mano.Graphic();
+        mano.appendChild(graphic);
+
+        const rect = new Mano.Graphic.Rect(100, 100, 100, 100);
+        graphic.appendChild(rect);
+
+        this.body.appendChild(mano);
+
+        const effect = new Mano.GraphicKeyframeEffect(rect, [
+            {backgroundColor: new Mano.Color.RGBA(255, 0, 0)},
+            {backgroundColor: new Mano.Color.RGBA(255, 125, 0)},
+            {backgroundColor: new Mano.Color.RGBA(255, 255, 0)},
+            {backgroundColor: new Mano.Color.RGBA(0, 255, 0)},
+            {backgroundColor: new Mano.Color.RGBA(0, 255, 255)},
+            {backgroundColor: new Mano.Color.RGBA(0, 0, 255)},
+            {backgroundColor: new Mano.Color.RGBA(255, 0, 255)},
+            {backgroundColor: new Mano.Color.RGBA(255, 0, 0)},
+        ], {
+            duration: 5000,
+            iterations: 3,
+        });
+        /*
+         * delay?: number;
+         * direction?: PlaybackDirection;
+         * duration?: number | CSSNumericValue | string;
+         * 没实现easing?: string;
+         * endDelay?: number;
+         * fill?: FillMode= "none", "forwards", "backwards", "both", "auto"
+         * 也不想要了iterationStart?: number;
+         * iterations?: number;
+         * playbackRate?: number;
+         * 也不想要了composite?: CompositeOperation;
+         * 不要了iterationComposite?: IterationCompositeOperation;
+        */
+        const animation = new Mano.Animation(effect, document.timeline);
+        animation.addEventListener("finish", function () {
+            console.log("finish");
+        })
+        rect.animation = animation;
+
+        rect.addEventListener("click", function () {
+            console.log("click");
+        });
+
+        rect.addEventListener("mouseover", function () {
+            console.log("mouseover");
+        });
+        rect.addEventListener("mouseout", function () {
+            console.log("mouseout");
+        });
+
+        //bug1: 元素结束动画后直接闪了：消失的根本原因是动画属性被取消了，理应渲染到static上，但是依然渲染到了dynamics上,
+        //      造成这一点的原因是画布刷新的时候只会按照第一个收到的清除参数重新绘制，并且优化掉了不需要绘制的图案
+        //BUG2: 动画过程中好像不容易触发事件
+        //bug3： FontInit没封装完，就是font属性
+        //bug3: 目前支持变换的Matrix是通过只读的方式实现的，可以自定义Matrix类重载DOMMatrix类中的修改矩阵的方法
+        //bug3: 多做错误处理，多写注释，考虑将GraphicBase类分解成两个类
+        //bug3: group图元在注册鼠标事件的时候判断路径会自动按照fill的方式判断，需要通过给group设定path数组来修复，可修可不修
+        //bug3：CustomGraphic图元的计算包围盒要考虑是否需要实现
+        //bug3: 修了一个文字内容重复渲染且不跟着父元素走的bug，但是可能在处理group的时候，这个bug还会出现
+        //bug3: 在offset时有时无时，计算时间不均匀
+        //目前还差其他元素实现动画，以及动画还未封装完整，还有诸多bug
+    })
+</script>
+</body>
+</html>

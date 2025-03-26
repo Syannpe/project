@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        strong {
+            position: fixed;
+            top: 10px;
+            right: 40px;
+            font-size: 1em;
+            color: red;
+            z-index: 1;
+        }
+    </style>
+</head>
+<body>
+<strong></strong>
+<script type="module">
+    import {Mano} from "./Mano.js";
+
+    document.addEventListener("DOMContentLoaded", async function () {
+
+        const mano = new Mano();
+
+        const canvas = new Mano.Canvas({
+            height: 400,
+            width: 1000,
+            enableFPS:true
+        });
+        mano.appendChild(canvas);
+
+        const graphic = new Mano.Graphic();
+        mano.appendChild(graphic);
+
+        const g = new Mano.Graphic.Group();
+        const rect = new Mano.Graphic.Rect(100, 100, 100, 100);
+        g.appendChild(rect);
+        graphic.appendChild(g);
+
+        this.body.appendChild(mano);
+
+        const effect = new Mano.GraphicKeyframeEffect(rect, [
+            {boxTransform: g.boxTransform},
+            {boxTransform: g.boxTransform.translate(500, 0)},
+            {boxTransform: g.boxTransform.translate(500, 200)},
+            {boxTransform: g.boxTransform.translate(0, 200)},
+            {boxTransform: g.boxTransform, backgroundColor: new Mano.Color.RGBA(255, 0, 0)}
+        ], {
+            delay: 1000,
+            endDelay: 500,
+            duration: 2000,
+            playbackRate: 1,
+            iterationStart: 0,
+            iterations: 2,
+            direction: "alternate",
+            fill: "both",
+            easing: Mano.TimingFunction.linear()
+        });
+
+        const animation = new Mano.Animation(effect, document.timeline);
+        animation.addEventListener("finish", function () {
+            console.log("finish")
+        });
+
+        animation.addEventListener("remove", function () {
+            console.log("remove")
+        });
+        rect.animation = animation
+        function renderer() {
+            document.querySelector("strong").innerText = canvas.getFPS() + "";
+            requestAnimationFrame(renderer)
+        }
+
+        renderer();
+
+        //bug2：目前包围盒不会因为图形学移动而更新坐标
+        //bug2：在事件中动态添加事件不会成功触发
+        //bug3： FontInit没封装完，就是font属性，如果实现的话把Font类的包围盒参数高度改一下
+        //bug3: 目前支持变换的Matrix是通过只读的方式实现的，可以自定义Matrix类重载DOMMatrix类中的修改矩阵的方法
+        //较为重要，做前备份bug3: 多做错误处理，多写注释
+        //bug3: group图元在注册鼠标事件的时候判断路径会自动按照fill的方式判断，需要通过给group设定path数组来修复，可修可不修
+        //bug3：CustomGraphic图元的计算包围盒要考虑是否需要实现
+        //bug3: 在offset时有时无时，计算时间不均匀
+        //bug3：拟添加一个同时绘制边框和填充的填充参数
+        //drawFocusIfNeeded准备放弃
+        //目前还差其他元素实现动画，以及动画还未封装完整，还有诸多bug
+    })
+</script>
+</body>
+</html>

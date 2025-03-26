@@ -1,0 +1,26 @@
+[
+    {
+        "name": "get-test",
+        "url": "/get-test",
+        "method": "GET",
+        "desc": "用于测试get请求",
+        "options": {
+            "headers": {
+                "Content-Type": "text/plain"
+            },
+            "body": "a=1"
+        }
+    },
+    {
+        "name": "post-test",
+        "url": "/post-test",
+        "method": "POST",
+        "desc": "用于测试post请求",
+        "options": {
+            "headers": {
+                "Content-Type": "text/plain"
+            },
+            "body": "Hello World"
+        }
+    }
+]

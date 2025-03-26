@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style></style>
+</head>
+<body>
+
+<script type="module">
+    import {Mano} from "../../Mano.js";
+
+    import {linearFunction} from "./linearFunction.js";
+    import {steps} from "./steps.js";
+    import {ease} from "./ease.js";
+
+    document.addEventListener("DOMContentLoaded", function () {
+        let mano = new Mano();
+
+        const c = new Mano.Canvas({
+            height: 500,
+            width: 1000
+        });
+        mano.appendChild(c);
+        const g = new Mano.Graphic();
+        mano.appendChild(g);
+
+        let [x1, y1, x2, y2] = [0.13323333740234375, 0.6495333329836528, 0.9365666707356771, 0.09119999965031944];
+        let curve = steps(5, "jump-both");
+        for (let i = 0; i < 1; i += 1 / 400) {
+            let p1 = curve(i)
+            let p2 = curve(i + 1 / 400)
+            console.log(p1.x * 400, Math.abs(p1.y) * 400, p2.x * 400, Math.abs(p2.y) * 400)
+            let line = new Mano.Graphic.Line(p1.x * 400, Math.abs(p1.y) * 400, p2.x * 400, Math.abs(p2.y) * 400);
+            line.fillType = Mano.FILL_TYPE.GRAPHIC_STROKE;
+            g.appendChild(line)
+        }
+
+        console.log(400, 400, 400 + x1 * 400, y1 * 400, 400 + x2 * 400, y2 * 400, 800, 0)
+        // let bc = new Mano.Graphic.BezierCurve(400, 0, 400 + x1 * 400, y1 * 400, 400 + x2 * 400, y2 * 400, 800, 400)
+        let bc = new Mano.Graphic.BezierCurve(400, 0, 400 + 0.25 * 400, 0.1 * 400, 400 + 0.25 * 400, 1.0 * 400, 800, 400)
+
+        bc.fillType = Mano.FILL_TYPE.GRAPHIC_STROKE;
+        g.appendChild(bc);
+
+        document.body.appendChild(mano);
+    })
+</script>
+</body>
+</html>

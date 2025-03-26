@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style></style>
+</head>
+<body>
+
+<script type="module">
+    import {Mano} from "./Mano.js";
+
+    document.addEventListener("DOMContentLoaded", function () {
+        const mano = new Mano();
+
+        const canvas = new Mano.Canvas({
+            width: document.documentElement.clientWidth,
+            height: document.documentElement.clientHeight,
+        });
+
+        const graphic = new Mano.Graphic();
+
+
+        let rect = new Mano.Graphic.Rect(10, 10, 100, 100);
+        rect.fillType = Mano.FILL_TYPE.GRAPHIC_STROKE;
+        rect.content = 123;
+        /*rect.addEventListener("click", function () {
+            console.log("click")
+        });
+        rect.addEventListener("contextmenu", function () {
+            console.log("contextmenu")
+        });
+        rect.addEventListener("dblclick", function () {
+            console.log("dblclick")
+        });
+        rect.addEventListener("mouseover", function () {
+            console.log("mouseover")
+            rect.backgroundColor = new Mano.Color.RGBA(255, 0, 0);
+        });
+        rect.addEventListener("mouseout", function () {
+            console.log("mouseout")
+            rect.backgroundColor = new Mano.Color.RGBA(0, 0, 0);
+        });
+        rect.addEventListener("wheel", function () {
+            console.log("wheel")
+        })*/
+        // graphic.appendChild(rect);
+
+        let bezierCurve = new Mano.Graphic.BezierCurve(50, 20, 230, 30, 150, 80, 250, 100);
+        bezierCurve.backgroundColor = new Mano.Color.RGBA(255, 0, 0, .1);
+        bezierCurve.border = new Mano.Border({
+            lineWidth: 10
+        })
+        bezierCurve.fillType = Mano.FILL_TYPE.GRAPHIC_STROKE;
+        bezierCurve.content = 123;
+        bezierCurve.addEventListener("click", function (ev) {
+            console.log("click")
+            this.removeEventListener("mouseout", mouseout)
+        });
+        bezierCurve.addEventListener("mouseover", function () {
+            console.log("mouseover")
+            bezierCurve.backgroundColor = new Mano.Color.RGBA(0, 0, 255, .1);
+        });
+
+        function mouseout() {
+            console.log("mouseout")
+            bezierCurve.backgroundColor = new Mano.Color.RGBA(255, 0, 0, .1);
+        }
+
+        bezierCurve.addEventListener("mouseout", mouseout);
+        bezierCurve.addEventListener("wheel", function () {
+            console.log("wheel")
+        });
+
+        /*bezierCurve.addEventListener("touchstart",function (){
+            console.log("pointerdown");
+        });
+        bezierCurve.addEventListener("pointerup",function (){
+            console.log("pointerup");
+        });*/
+        /*rect2.addEventListener("contextmenu", function () {
+            console.log("contextmenu")
+        });
+        rect2.addEventListener("dblclick", function () {
+            console.log("dblclick")
+        });
+
+        rect2.addEventListener("mouseout", function () {
+            console.log("mouseout")
+            rect2.backgroundColor = new Mano.Color.RGBA(0, 0, 0);
+        });
+        */
+        graphic.appendChild(bezierCurve);
+
+        mano.appendChild(canvas);
+        mano.appendChild(graphic);
+        this.body.appendChild(mano);
+
+        setTimeout(function () {
+            // graphic.removeChild(rect)
+        }, 500)
+
+        //bug3：FontInit没封装完，就是font属性
+        //bug3: 目前支持变换的Matrix是通过只读的方式实现的，可以自定义Matrix类重载DOMMatrix类中的修改矩阵的方法
+        //写动画的时候可以把动画注册到元素上，之后通过window.getComputedStyle()方法逐帧检测样式变化之后赋值
+        //bug2:注册事件的时候会因为mousemove事件的原因一次注册多个事件。
+    })
+</script>
+</body>
+</html>

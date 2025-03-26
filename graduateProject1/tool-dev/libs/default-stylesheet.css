@@ -1,0 +1,614 @@
+@media (prefers-color-scheme: dark) {
+    *{
+        filter: invert(1);
+    }
+}
+
+* {
+    font-family: "Times New Roman", "微软雅黑", serif;
+}
+
+body {
+    background-color: #fff; /* 设置暗灰色背景 */
+    color: #000; /* 修改文本颜色为白色 */
+}
+
+/* 通用样式 */
+img {
+    display: block; /* 移除内联元素默认间隙 */
+    max-width: 100%; /* 保证图片不会超出容器宽度 */
+    box-sizing: border-box;
+    height: auto; /* 保持图片比例 */
+    border-radius: 12px; /* 圆角边框 */
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2), 0 2px 6px rgba(0, 0, 0, 0.12); /* 阴影效果 */
+    border: 3px solid white; /* 默认透明边框，悬停时增强视觉 */
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease; /* 平滑过渡动画 */
+}
+
+/* 悬停时的精致效果 */
+img:hover {
+    /*transform: scale(1.05); !* 缩放图片 *!*/
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.45), 0 3px 5px rgba(0, 0, 0, 0.3); /* 加强阴影 */
+    border-color: #639; /* 增加主题色边框 */
+}
+
+button {
+    background-color: #663399aa;
+    color: #ffffff;
+    padding: 15px 30px;
+    border: none;
+    border-radius: 25px;
+    font-size: 16px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    cursor: pointer;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+button:hover {
+    background-color: #663399;
+    box-shadow: 0 15px 20px rgba(0, 0, 0, 0.2);
+    transform: translateY(-2px);
+}
+
+button:active {
+    background-color: #663399;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+    transform: translateY(0);
+}
+
+label {
+    position: relative;
+    width: min(100%, 400px);
+}
+
+label input {
+    width: min(100%, 400px);
+    padding: 15px 20px;
+    font-size: 16px;
+    border: 2px solid transparent;
+    border-radius: 25px;
+    background-color: #ffffff;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    outline: none;
+}
+
+label input:focus {
+    border-color: #663399;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+label input::placeholder {
+    color: #663399;
+    font-size: 14px;
+}
+
+label::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    right: 20px;
+    width: 10px;
+    height: 10px;
+    background-color: #663399;
+    border-radius: 50%;
+    transform: translateY(-50%);
+    transition: all 0.3s ease;
+    opacity: 0;
+}
+
+label input:focus + ::after {
+    opacity: 1;
+}
+
+p {
+    /*max-width: 600px;*/
+    margin: 20px;
+    padding: 20px;
+    font-size: 18px;
+    line-height: 1.6;
+    color: #333;
+    background: linear-gradient(135deg, #f5f7fa 0%, #66339933 100%);
+    border-left: 8px solid #663399;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    position: relative;
+    overflow: hidden;
+}
+
+p::before {
+    content: '“';
+    font-size: 50px;
+    color: rgba(98, 0, 234, 0.2);
+    position: absolute;
+    top: -20px;
+    left: -20px;
+}
+
+p::after {
+    content: '”';
+    font-size: 50px;
+    color: rgba(98, 0, 234, 0.2);
+    position: absolute;
+    bottom: -20px;
+    right: -20px;
+}
+
+strong {
+    color: #639;
+    font-weight: normal;
+    text-shadow: 0px 0px 2px rgba(102, 51, 153, 0.5);
+    border-bottom: 2px solid rgba(102, 51, 153, 0.3);
+    padding-bottom: 2px;
+}
+
+
+details {
+    /*一个变量的容器，js初始化的时候会给他们赋值*/
+    /*--open-height: 0;*/
+    /*--close-height: 0;*/
+
+    background-color: #f4f0fa;
+    color: #639;
+    border: 1px solid #639;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 10px 0;
+    box-shadow: 0 2px 5px rgba(102, 51, 153, 0.3);
+    overflow: hidden;
+    text-indent: 2em;
+    transition: .3s;
+}
+
+details:not([open]):hover {
+    background-color: #639;
+}
+
+details:not([open]):hover summary,
+details:not([open]):hover ::marker {
+    color: #f4f0fa
+}
+
+details.anime[open] {
+    animation: expand .3s ease-in forwards;
+}
+
+details.anime:not([open]) {
+    animation: collapse .3s ease-in forwards;
+}
+
+summary {
+    color: #639;
+    font-weight: normal;
+    cursor: pointer;
+    padding: 5px 0;
+    outline: none;
+    position: relative;
+}
+
+summary::marker {
+    color: #639;
+}
+
+summary > * {
+    display: inline-block;
+    width: 90%;
+}
+
+@keyframes expand {
+    0% {
+        height: var(--close-height);
+    }
+    100% {
+        height: var(--open-height);
+    }
+}
+
+@keyframes collapse {
+    0% {
+        height: var(--open-height);
+    }
+    100% {
+        height: var(--close-height);
+    }
+}
+
+.table-container {
+    width: 80%;
+    margin: 20px 0;
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 25px 0;
+    font-size: 18px;
+    min-width: 400px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+    background-color: white;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+table thead tr {
+    background-color: #663399;
+    color: #ffffff;
+    text-align: left;
+    font-weight: bold;
+}
+
+table th,
+table td {
+    padding: 12px 15px;
+    border-bottom: 1px solid #dddddd;
+}
+
+table tbody tr {
+    border-bottom: 1px solid #dddddd;
+    transition: background-color 0.3s;
+}
+
+table tbody tr:nth-of-type(even) {
+    background-color: #f3f3f3;
+}
+
+table tbody tr:last-of-type {
+    border-bottom: 2px solid #663399;
+}
+
+table tbody tr.active-row {
+    font-weight: bold;
+    color: #663399;
+}
+
+table tbody tr:hover {
+    background-color: #f1f1f1;
+    cursor: pointer;
+}
+
+table thead th {
+    position: relative;
+}
+
+table thead th::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 4px;
+    width: 100%;
+    background-color: silver;
+    transform: scaleX(0);
+    transition: transform 0.3s;
+}
+
+table thead th:hover::after {
+    transform: scaleX(1);
+}
+
+/* 设置盒子的样式 */
+div {
+    display: inline-block;
+    background-color: #e6e6fa; /* 浅色背景 */
+    border: 2px solid #663399; /* 主颜色边框 */
+    border-radius: 10px; /* 圆角 */
+    padding: 1rem; /* 盒子内边距 */
+    margin-bottom: 1rem; /* 盒子底部间距 */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* 阴影效果 */
+    break-inside: avoid; /* 防止盒子被拆分 */
+    transition: transform 0.2s; /* 过渡效果 */
+    color: #663399; /* 文字颜色 */
+    /*width: 100%; !* 盒子的宽度 *!*/
+    max-width: 500px; /* 最大宽度 */
+    min-width: 200px; /* 最小宽度 */
+    max-height: 200px; /* 最大高度 */
+    min-height: 100px; /* 最小高度 */
+    box-sizing: border-box; /* 包括内边距和边框在内计算宽度 */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap; /* 禁止换行 */
+}
+
+/* 盒子悬停效果 */
+div:hover {
+    transform: translateY(-5px); /* 悬停时上移 */
+}
+
+a {
+    color: #663399; /* 主要颜色 */
+    text-decoration: none;
+    padding: 10px 20px;
+    border: 2px solid #663399;
+    border-radius: 5px;
+    background: white;
+    transition: all 0.3s ease;
+    position: relative;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+a::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    height: 100%;
+    background: #663399;
+    z-index: -1;
+    transition: all 0.3s ease;
+    border-radius: 5px;
+    transform: translate(-50%, -50%) scale(0);
+}
+
+a:hover::before {
+    transform: translate(-50%, -50%) scale(1.1);
+}
+
+a:hover {
+    color: white;
+    border-color: #663399;
+    background: #66339966;
+}
+
+
+/* 基础样式 */
+h1 {
+    font-size: 2.5em;
+    margin: 20px auto;
+    text-align: center;
+    padding: 20px;
+    color: #639;
+    line-height: 1.4;
+    transition: all 0.3s ease;
+    font-family: "微软雅黑", serif;
+    font-weight: 100;
+}
+
+h2, h3, h4, h5, h6 {
+    margin: 20px 10px;
+    padding: 20px;
+    background: #fff;
+    color: #333;
+    border-left: 10px solid #663399; /* 主颜色 */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    line-height: 1.4;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+    text-indent: 1em;
+    font-family: "Times New Roman", "微软雅黑", serif;
+    font-weight: normal;
+}
+
+/* 悬停效果 */
+h2:hover, h3:hover, h4:hover, h5:hover, h6:hover {
+    background-color: #663399;
+    color: #fff;
+    border-left-color: #fff;
+}
+
+/* 具体样式 */
+h2 {
+    font-size: 2em;
+}
+
+h3 {
+    font-size: 1.75em;
+}
+
+h4 {
+    font-size: 1.5em;
+}
+
+h5 {
+    font-size: 1.25em;
+}
+
+h6 {
+    font-size: 1em;
+}
+
+/* 响应式设计 */
+@media (max-width: 600px) {
+    h1 {
+        font-size: 2em;
+    }
+
+    h2 {
+        font-size: 1.75em;
+    }
+
+    h3 {
+        font-size: 1.5em;
+    }
+
+    h4 {
+        font-size: 1.25em;
+    }
+
+    h5 {
+        font-size: 1em;
+    }
+
+    h6 {
+        font-size: 0.875em;
+    }
+}
+
+hr {
+    border: 0;
+    height: 2px;
+    background: linear-gradient(90deg, rgba(102, 51, 153, 0) 0%, #639 50%, rgba(102, 51, 153, 0) 100%);
+    margin: 20px 0;
+    box-shadow: 0 0 10px rgba(102, 51, 153, 0.5);
+    border-radius: 1px;
+}
+
+
+ul {
+    list-style: none; /* 去除默认的列表样式 */
+    padding: 0;
+    background: #f9f9f9; /* 柔和的背景色 */
+    border-radius: 10px; /* 圆角 */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 柔和阴影 */
+    overflow: hidden; /* 避免超出边界的元素 */
+    /*max-width: 400px; !* 控制宽度 *!*/
+    margin: 20px 20px; /* 居中 */
+}
+
+ul li {
+    padding: 15px 50px;
+    font-family: 'Arial', sans-serif;
+    font-size: 16px;
+    text-indent: 0;
+    color: #333;
+    border-bottom: 1px solid #e0e0e0; /* 分隔线 */
+    position: relative; /* 为伪元素做定位 */
+    transition: background 0.3s ease, color 0.3s ease; /* 添加过渡效果 */
+}
+
+ul li:last-child {
+    border-bottom: none; /* 去除最后一项的分隔线 */
+}
+
+ul li:hover {
+    background: #639; /* 鼠标悬停时的背景色 */
+    color: #fff; /* 鼠标悬停时的文字颜色 */
+}
+
+ul li::before {
+    content: ''; /* 自定义列表标记 */
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    background: #639; /* 使用主色调 */
+    border-radius: 50%; /* 圆形标记 */
+    position: absolute;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    transition: background 0.3s ease; /* 添加过渡效果 */
+}
+
+ul li:hover::before {
+    background: #fff; /* 鼠标悬停时的标记颜色 */
+}
+
+ol {
+    counter-reset: list-counter; /* 初始化计数器 */
+    padding: 0;
+    background: #f9f9f9; /* 柔和背景色 */
+    border-radius: 10px; /* 圆角设计 */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 阴影效果 */
+    overflow: hidden; /* 确保内容不会溢出 */
+    margin: 20px 20px; /* 居中对齐 */
+}
+
+ol li {
+    list-style: none; /* 去除默认数字 */
+    position: relative; /* 为伪元素提供定位上下文 */
+    padding: 15px 50px;
+    text-indent: 0;
+    font-family: 'Arial', sans-serif;
+    font-size: 16px;
+    color: #333;
+    border-bottom: 1px solid #e0e0e0; /* 分隔线 */
+    transition: background 0.3s ease, color 0.3s ease;
+}
+
+ol li:last-child {
+    border-bottom: none; /* 去除最后一项分隔线 */
+}
+
+ol li:hover {
+    background: #639; /* 鼠标悬停时背景 */
+    color: #fff; /* 鼠标悬停时字体颜色 */
+}
+
+ol li::before {
+    content: counter(list-counter) ". "; /* 使用计数器生成数字 */
+    counter-increment: list-counter; /* 每次增加计数 */
+    font-weight: bold;
+    font-size: 18px;
+    color: #639; /* 主色调数字 */
+    position: absolute;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    transition: color 0.3s ease; /* 颜色过渡效果 */
+}
+
+ol li:hover::before {
+    color: #fff; /* 悬停时数字颜色变化 */
+}
+
+abbr {
+    text-decoration: none; /* 移除默认的下划虚线 */
+    position: relative; /* 为伪元素定位提供上下文 */
+    font-weight: bold; /* 强调文字 */
+    color: #639; /* 主色调 */
+    cursor: help; /* 鼠标悬停时显示帮助指针 */
+    transition: color 0.3s ease; /* 颜色变化的过渡效果 */
+}
+
+abbr:hover {
+    color: #426; /* 悬停时颜色变深 */
+}
+
+abbr::after {
+    content: attr(title); /* 显示 title 属性的内容 */
+    position: absolute;
+    top: 100%; /* 显示在文字下方 */
+    left: 50%;
+    transform: translateX(-50%);
+    background: #639; /* 使用主色调作为背景 */
+    color: #fff; /* 提示文字颜色 */
+    padding: 5px 10px; /* 提示框内边距 */
+    font-size: 12px;
+    border-radius: 5px; /* 圆角边框 */
+    white-space: nowrap; /* 避免换行 */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* 添加阴影效果 */
+    opacity: 0; /* 初始隐藏 */
+    visibility: hidden; /* 防止布局抖动 */
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+abbr:hover::after {
+    opacity: 1; /* 显示提示框 */
+    visibility: visible;
+}
+
+
+/* 自定义滚动条样式 */
+.scroll-container::-webkit-scrollbar {
+    width: 12px; /* 竖向滚动条宽度 */
+    height: 12px; /* 横向滚动条高度 */
+}
+
+/* 滚动条轨道 */
+.scroll-container::-webkit-scrollbar-track {
+    background: #fff; /* 背景浅蓝色 */
+    border-radius: 20px;
+}
+
+/* 滚动条滑块 */
+.scroll-container::-webkit-scrollbar-thumb {
+    background: #639; /* 主题色 */
+    border-radius: 20px;
+    border: 3px solid #fff; /* 外边框效果 */
+}
+
+/* 滑块悬停样式 */
+.scroll-container::-webkit-scrollbar-thumb:hover {
+    background: #4677b3; /* 深蓝色加深效果 */
+}
+
+/* Firefox 支持 */
+.scroll-container {
+    scrollbar-color: #639 #fff; /* 滑块颜色和轨道颜色 */
+    scrollbar-width: thin; /* 滚动条宽度：thin */
+}

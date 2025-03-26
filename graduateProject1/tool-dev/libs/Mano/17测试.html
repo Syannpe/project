@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style></style>
+</head>
+<body>
+<script type="module">
+    import {Mano} from "./Mano.js";
+
+    document.addEventListener("DOMContentLoaded", function () {
+        const mano = new Mano();
+
+        const canvas = new Mano.Canvas({
+            width: document.documentElement.clientWidth - 50,
+            height: document.documentElement.clientHeight - 50,
+        });
+        mano.appendChild(canvas);
+        const graphic = new Mano.Graphic();
+        mano.appendChild(graphic);
+
+        const rect = new Mano.Graphic.Rect(10, 10, 100, 100);
+        rect.content = "1230";
+        rect.border = new Mano.Border({
+            lineWidth: 10,
+        })
+        rect.textTransform = rect.textTransform.translate(10, 10)
+        rect.fillType = Mano.FILL_TYPE.GRAPHIC_STROKE;
+        graphic.appendChild(rect);
+
+        rect.addEventListener("click", function () {
+            console.log(123)
+        })
+        document.body.appendChild(mano);
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        strong {
+            position: fixed;
+            top: 10px;
+            right: 40px;
+            font-size: 1em;
+            color: red;
+            z-index: 1;
+        }
+    </style>
+</head>
+<body>
+<strong></strong>
+
+<script type="module">
+    import {Mano} from "./Mano.js";
+
+    document.addEventListener("DOMContentLoaded", function () {
+        const mano = new Mano();
+
+        const canvas = new Mano.Canvas({
+            height: 400,
+            width: 1000,
+            enableFPS: true
+        });
+        mano.appendChild(canvas);
+
+        const graphic = new Mano.Graphic();
+        mano.appendChild(graphic);
+
+        const group = new Mano.Graphic.Group();
+        const rect = new Mano.Graphic.BezierCurve(100, 0, 120, -30, 170, 50, 200, 0);
+        rect.backgroundColor = new Mano.Color.RGBA(255, 0, 0);
+        rect.fillType = Mano.FILL_TYPE.GRAPHIC_STROKE;
+        rect.content = "123";
+        rect.boxTransform = new DOMMatrix([1, 0, 0, 1, 0, 30]);
+        group.appendChild(rect);
+        group.boxShadow = new Mano.Shadow({
+            color: new Mano.Color.RGBA(255, 0, 0),
+            blur: 1
+        })
+        graphic.appendChild(group);
+
+        /*window.onclick = function () {
+            let effect = new Mano.GraphicKeyframeEffect(group, [
+                {boxTransform: group.currentBoxTransform},
+                {boxTransform: group.currentBoxTransform.translate(100, 0, 0)},
+            ], {
+                duration: 1000,
+            });
+            let anime = new Mano.Animation(effect, document.timeline);
+            group.animation = anime;
+        }
+        window.oncontextmenu = function (ev) {
+            ev.preventDefault();
+            console.log(rect.currentBoxTransform)
+
+            rect.boxTransform = rect.currentBoxTransform.translate(10, 0, 0);
+            // group.boxShadow.blur--;
+
+        }*/
+        let effect = new Mano.GraphicKeyframeEffect(group, [
+            {boxTransform: group.currentBoxTransform},
+            {boxTransform: group.currentBoxTransform.translate(100, 0, 0)},
+        ], {
+            duration: 1000,
+        });
+        let anime = new Mano.Animation(effect, document.timeline);
+        group.animation = anime;
+
+
+        anime.addEventListener("finish", function () {
+            console.log(rect.inheritBoxTransform, rect.currentBoxTransform, rect.boxTransform)
+            let effect2 = new Mano.GraphicKeyframeEffect(rect, [
+                {boxTransform: rect.currentBoxTransform},
+                {boxTransform: rect.currentBoxTransform.scale(1, 2, 1).rotate(0, 0, 45)},
+            ], {
+                duration: 2000,
+            });
+            let anime2 = new Mano.Animation(effect2, document.timeline);
+            rect.animation = anime2;
+
+            anime2.addEventListener("finish", function () {
+                console.log(document.timeline);
+            })
+        })
+
+        document.body.appendChild(mano)
+
+        function renderer() {
+            document.querySelector("strong").innerText = canvas.getFPS() + "";
+            requestAnimationFrame(renderer)
+        }
+
+        renderer();
+
+    })
+</script>
+</body>
+</html>

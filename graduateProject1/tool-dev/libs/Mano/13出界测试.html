@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style></style>
+</head>
+<body>
+
+<script type="module">
+    import {Mano} from "./Mano.js";
+
+    document.addEventListener("DOMContentLoaded", function () {
+        const mano = new Mano();
+
+        const canvas = new Mano.Canvas({
+            height: 400,
+            width: 400,
+            enableFPS: true
+        });
+        mano.appendChild(canvas);
+
+        const graphic = new Mano.Graphic();
+        mano.appendChild(graphic);
+
+        const rect = new Mano.Graphic.Rect(100, 100, 100, 100);
+        graphic.appendChild(rect);
+        this.body.appendChild(mano);
+
+        rect.addEventListener("click", function () {
+            console.log("rect");
+        })
+
+        const effect = new Mano.GraphicKeyframeEffect(rect, [
+            {boxTransform: rect.boxTransform},
+            {boxTransform: rect.boxTransform.translate(500, 0).scale(2).rotate(0, 0, 45)},
+        ], {
+            delay: 0,
+            endDelay: 0,
+            duration: 5000,
+            playbackRate: 1,
+            iterations: 2,
+            direction: "alternate",
+            fill: "backwards",
+            easing: Mano.TimingFunction.linear()
+        });
+
+        const animation = new Mano.Animation(effect, document.timeline);
+        rect.animation = animation
+        rect.getBoundingClientRect()
+    })
+</script>
+</body>
+</html>

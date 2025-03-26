@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        strong {
+            position: fixed;
+            top: 10px;
+            right: 40px;
+            font-size: 1em;
+            color: red;
+            z-index: 1;
+        }
+    </style>
+</head>
+<body>
+<strong></strong>
+
+<script type="module">
+    import {Mano} from "./Mano.js";
+
+    document.addEventListener("DOMContentLoaded", function () {
+        const mano = new Mano();
+
+        const canvas = new Mano.Canvas({
+            height: 2000,
+            width: 1000,
+            enableFPS: true,
+            globalAlpha: 0.5,
+            globalCompositeOperation: "xor"
+        });
+        mano.appendChild(canvas);
+
+        const graphic = new Mano.Graphic();
+        mano.appendChild(graphic);
+
+        const rect = new Mano.Graphic.Rect(100, 1500, 120, 120);
+        rect.backgroundColor = Mano.COLOR_NAME.RED;
+        graphic.appendChild(rect);
+
+        document.body.appendChild(mano);
+
+        function renderer() {
+            document.querySelector("strong").innerText = canvas.getFPS() + "";
+            requestAnimationFrame(renderer)
+        }
+
+        renderer();
+    })
+</script>
+</body>
+</html>

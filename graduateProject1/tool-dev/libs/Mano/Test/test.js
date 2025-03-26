@@ -1,0 +1,1 @@
+CanvasRenderingContext2D.prototype.globalCompositeOperation;

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style></style>
+</head>
+<body>
+<script type="module">
+    import {Mano} from "./Mano.js";
+
+    document.addEventListener("DOMContentLoaded", function () {
+        let mano = new Mano();
+
+        let canvas = new Mano.Canvas({
+            width: 500,
+            height: 500,
+            clearColor: new Mano.Color.RGBA(255, 0, 0, .1)
+        });
+        mano.appendChild(canvas);
+
+        //GraphicBase调用方法触发事件令Canvas重绘
+        //触发事件还在思考如何通过graphic寻找Canvas
+
+        let graphics = new Mano.Graphic();
+        mano.appendChild(graphics)
+
+        let rect = new Mano.Graphic.Rect(0, 0, 100, 100);
+        rect.fillType = Mano.FILL_TYPE.GRAPHIC_STROKE;
+
+        canvas.addEventListener("manobeforerender", function () {
+            console.log("画布的beforerender事件触发");
+        });
+        canvas.addEventListener("manorender", function () {
+            console.log("画布的render事件触发");
+        });
+        canvas.addEventListener("manoafterrender", function () {
+            console.log("画布的afterrender事件触发");
+        });
+        rect.addEventListener("manorender", function () {
+            console.log("图元的render事件触发");
+        });
+        rect.addEventListener("manoafterrender", function (ev) {
+            console.log("图元的afterrender事件触发", ev);
+        });
+
+        graphics.appendChild(rect);
+        document.body.appendChild(mano);
+
+
+        /* setTimeout(function () {
+             graphics.removeChild(rect);
+         }, 1000);*/
+    })
+</script>
+</body>
+</html>
