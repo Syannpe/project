@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title(Ctrl+P保存)</title>
+    <link rel="stylesheet" href="./table-style.css"/>
+</head>
+<body>
+<table id="chart-table">
+    <caption></caption>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>任务名称</th>
+        <th>最早开始时间</th>
+        <th>最早结束时间</th>
+        <th>最晚开始时间</th>
+        <th>最晚结束时间</th>
+        <th>经历时常</th>
+        <th id="time-table-container">
+            <!--<table id="time-table">
+                <colgroup>
+                    <col>
+                </colgroup>
+                <thead>
+                <tr>
+                    <th colspan="8">第几月</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>第1天</td>
+                    <td>第2天</td>
+                    <td>第3天</td>
+                    <td>第4天</td>
+                    <td>第5天</td>
+                    <td>第6天</td>
+                    <td>第7天</td>
+                    <td>第8天</td>
+                </tr>
+                </tbody>
+            </table>-->
+        </th>
+    </tr>
+    </thead>
+    <tbody>
+    <!--<tr>
+        <td>1</td>
+        <td>任务1</td>
+        <td>2020, 10, 1</td>
+        <td>2020, 10, 5</td>
+        <td>2020, 10, 1</td>
+        <td>2020, 10, 5</td>
+        <td>4</td>
+        <td>
+            <table class="task">
+                <tbody>
+                <tr style="&#45;&#45;background-color:orange;&#45;&#45;cellNum:8">
+                    <td class="" style="&#45;&#45;colspan:2"></td>
+                    <td class="half-colored" style="&#45;&#45;colspan:2"></td>
+                    <td class="colored" style="&#45;&#45;colspan:2">50%</td>
+                    <td class="half-colored" style="&#45;&#45;colspan:1"></td>
+                    <td class="" style="&#45;&#45;colspan:1"></td>
+                </tr>
+                </tbody>
+            </table>
+        </td>
+    </tr>-->
+
+    </tbody>
+</table>
+<script src="./package/HTMLToImage.js"></script>
+
+<script type="module">
+    import {HTMLInterface} from "./interfaces/HTMLInterface.js";
+    import "./utils/main.js";
+
+    document.addEventListener("DOMContentLoaded", function () {
+        async function captureJPEG(node, quality = 0.95) {
+            // 第一次截图，可能会残缺（尤其是 iOS/Safari）
+            let dataUrl = await htmlToImage.toJpeg(node, {quality});
+            // 创建图片对象加载第一次截图图像
+            await new Promise(resolve => {
+                const img = new Image();
+                img.src = dataUrl;
+                img.onload = resolve;
+            });
+            // 再次截图，确保最终输出完整图像
+            return htmlToImage.toJpeg(node, {quality});
+        }
+
+        async function capturePNG(node) {
+            // 第一次截图，可能会残缺（尤其是 iOS/Safari）
+            let dataUrl = await htmlToImage.toPng(node);
+            // 创建图片对象加载第一次截图图像
+            await new Promise(resolve => {
+                const img = new Image();
+                img.src = dataUrl;
+                img.onload = resolve;
+            });
+            // 再次截图，确保最终输出完整图像
+            return htmlToImage.toPng(node);
+        }
+
+        // const htmlInterface = new HTMLInterface();
+        // htmlInterface.init(new Date("2020-9-30"), new Date("2020-10-7"));
+        // htmlInterface.drawRow("1", "任务1", new Date("2020-10-1"), new Date("2020-10-2"), new Date("2020-10-5"), new Date("2020-10-6"), "orange", "50%")
+        // htmlInterface.drawDate(0, new Date("2020-10-1"), new Date("2020-10-2"), new Date("2020-10-5"), new Date("2020-10-6"))
+        // htmlInterface.drawRow("1", "任务1", new Date("2020-10-1"), new Date("2020-10-2"), new Date("2020-10-5"), new Date("2020-10-6"), "orange", "50%")
+        // htmlInterface.drawDate(1, new Date("2020-10-2"), new Date("2020-10-2"), new Date("2020-10-5"), new Date("2020-10-4"))
+        window.addEventListener('keydown', async ev => {
+            if (!ev.ctrlKey || ev.key !== 'p') return false;
+            ev.preventDefault();
+
+            try {
+                const node = document.querySelector("table#chart-table");
+                const dataUrl = await capturePNG(node); // 截图并确保完整
+                const link = document.createElement('a');
+                link.download = 'capture.jpg';
+                link.href = dataUrl;
+                link.click();
+            } catch (err) {
+                console.error('截图并下载失败', err);
+            }
+        });
+    });
+
+</script>
+</body>
+</html>

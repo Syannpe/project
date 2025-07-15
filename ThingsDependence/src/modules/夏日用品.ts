@@ -27,6 +27,10 @@ class 风油精 extends TreeNode {
     name = this.constructor.name;
 }
 
+class 蚊香 extends TreeNode {
+    name = this.constructor.name;
+}
+
 class 夏日用品 extends TreeNode {
     name = this.constructor.name;
     children: TreeNode[] = [];
@@ -39,6 +43,7 @@ class 夏日用品 extends TreeNode {
         this.children.push(new 电风扇());
         this.children.push(new 墨镜());
         this.children.push(new 风油精());
+        this.children.push(new 蚊香());
     }
 }
 
@@ -48,5 +53,6 @@ export {
     扇子,
     电风扇,
     墨镜,
+    蚊香,
     风油精
 }

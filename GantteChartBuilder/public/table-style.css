@@ -1,0 +1,145 @@
+@font-face {
+    font-family: "main";
+    src: url("./font-family/fzse_gbk.ttf"), local("Source Code Pro"), local("微软雅黑"), local("宋体"), local(serif);
+    font-weight: 300;
+    font-style: normal;
+}
+
+body {
+    --border-color: #ccc;
+    --header-font-weight: 300;
+    font-family: main, serif;
+
+}
+
+table caption {
+    font-size: 2rem;
+    margin: 1rem;
+}
+
+table {
+    border-collapse: collapse;
+    box-sizing: border-box;
+    white-space: nowrap;
+
+}
+
+table#chart-table, table#time-table {
+    table-layout: fixed;
+}
+
+table#chart-table > thead > tr > th {
+    font-weight: var(--header-font-weight);
+}
+
+table#chart-table > thead > tr > th:not(:has(table#time-table)),
+table#chart-table > tbody > tr > td {
+    border: 1px solid var(--border-color);
+    padding: 0.5rem;
+    text-align: center;
+    vertical-align: middle;
+}
+
+table#chart-table > thead > tr > th:has(table#time-table) {
+    border: none;
+    padding: 0;
+}
+
+table#time-table {
+    table-layout: fixed;
+    border-collapse: collapse;
+    box-sizing: border-box;
+    margin: -0.5px;
+}
+
+table#time-table > colgroup > col {
+    width: 2rem !important;
+}
+
+table#time-table > thead > tr > th {
+    font-weight: var(--header-font-weight);
+}
+
+table#time-table > thead > tr > th,
+table#time-table > tbody > tr > td {
+    text-align: center;
+}
+
+table#time-table > thead > tr > th {
+    text-overflow: fade;
+}
+
+table#time-table > tbody > tr > td {
+    width: 2rem;
+}
+
+table#time-table > thead > tr > th:not(:first-child),
+table#time-table > tbody > tr > td:not(:first-child) {
+    border: 1px solid var(--border-color);
+}
+
+table#time-table > thead > tr > th:first-child,
+table#time-table > tbody > tr > td:first-child {
+    border: 1px solid var(--border-color);
+    border-left: none;
+}
+
+table#chart-table > tbody > tr > td:has(table.task) {
+    padding: .5rem 0;
+}
+
+table.task {
+    width: 100%;
+    min-height: 1rem;
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+table.task > tbody > tr {
+    border-radius: 5px;
+}
+
+/*
+    TODO:这里要把单元格的长度把控好
+*/
+table.task > tbody > tr > td {
+    width: calc(100% / var(--cellNum) * var(--colspan));
+}
+
+table.task > tbody > tr > td.colored {
+    background-color: var(--background-color);
+    color: white;
+    padding: .1rem 0;
+    font-size: 0.9rem;
+}
+
+table.task > tbody > tr > td.half-colored {
+    background-color: var(--background-color);
+    opacity: .5;
+    color: white;
+    padding: .1rem 0;
+    font-size: 0.9rem;
+}
+
+/* 左端：前面不是 .colored 且自己是 .colored */
+table.task tr td:is(:not(.half-colored,.colored)) + :is(td.colored, td.half-colored) {
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+
+/* 右端：自己是 .colored，后面不是 .colored */
+table.task tr td.colored:has(+ td:not(.half-colored,.colored)),
+table.task tr td.half-colored:has(+ td:not(.half-colored,.colored)) {
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+table.task tr td:is(.colored, .half-colored):is(.important) {
+    background: red;
+    box-shadow: 0 0 3px red;
+}
+
+table.task tr td:is(.colored, .half-colored):is(.finished) {
+    background: #888;
+    box-shadow: none;
+}
