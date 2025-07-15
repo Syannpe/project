@@ -19,7 +19,8 @@ module.exports = {
     output: {
         filename: "./bundle.js",
         path: path.resolve(__dirname, "./dist"),
-        clean: true
+        clean: true,
+        publicPath: '/', // 或其他根据部署需要设定的路径
     },
     plugins: [
         new HtmlWebpackPlugin({

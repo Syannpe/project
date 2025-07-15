@@ -21,6 +21,9 @@ class 墨镜 extends TreeNode {
 class 风油精 extends TreeNode {
     name = this.constructor.name;
 }
+class 蚊香 extends TreeNode {
+    name = this.constructor.name;
+}
 class 夏日用品 extends TreeNode {
     name = this.constructor.name;
     children = [];
@@ -32,7 +35,8 @@ class 夏日用品 extends TreeNode {
         this.children.push(new 电风扇());
         this.children.push(new 墨镜());
         this.children.push(new 风油精());
+        this.children.push(new 蚊香());
     }
 }
-export { 夏日用品, 防晒霜, 扇子, 电风扇, 墨镜, 风油精 };
+export { 夏日用品, 防晒霜, 扇子, 电风扇, 墨镜, 蚊香, 风油精 };
 //# sourceMappingURL=%E5%A4%8F%E6%97%A5%E7%94%A8%E5%93%81.js.map
