@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="consoleInlineStyleSheet.css" />
+    <style>
+        div {
+            height: 500px;
+            width: 300px;
+            border: red solid 1px;
+            resize: inline;
+        }
+    </style>
+</head>
+<body>
+<div></div>
+<ul>
+    <li style="border: red solid 1px;"><span>asdfasdf: </span><details style="display: inline">
+        <summary style="display: inline; ">123</summary>
+        1231231231231
+    </details></li>
+</ul>
+<script type="module">
+    import {Console} from "./Console.js"
+
+    document.addEventListener("DOMContentLoaded", function () {
+        const con = new Console();
+        con.renderAsConsoleInline(document.querySelector("div"));
+
+        con.output("测试数据测试数据测试数据")
+        con.output("asdfasdfasdfasdfasdf")
+    });
+</script>
+</body>
+</html>

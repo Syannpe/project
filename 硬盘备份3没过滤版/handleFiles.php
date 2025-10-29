@@ -25,7 +25,7 @@ function handleFiles($online = [], $offline = [], $cantVisit = [])
                 array_push($cantVisit, $name);
             }
         } else {
-            $json_str = json_encode(selectdir($name, $add, 1, false));
+            $json_str = json_encode(selectdir($name, $add, 3, false));
             echo $json_str . ",";
 
             //保存至文件

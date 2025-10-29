@@ -1,0 +1,86 @@
+.console-container {
+    /* 1. 父元素设置定位，成为定位容器 */
+    position: relative;
+    overflow: hidden;
+
+    --panel-width: 50%;
+    --panel-font-family: Source Code Pro, 微软雅黑, serif;
+    --panel-color: #f6f6f6;
+    --panel-background-color: #265f67;
+}
+
+#console-panel {
+    background-color: var(--panel-background-color);
+    color: var(--panel-color);
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 100%;
+    width: var(--panel-width);
+    overflow: auto;
+    transition: .3s;
+}
+
+#console-panel-cancel-btn {
+    position: absolute;
+    top: 0;
+    right: var(--panel-width);
+    height: 100%;
+    width: 1rem;
+    border: none;
+    transition: .3s;
+}
+
+#console-panel > p {
+    /*white-space: pre;*/
+    /*word-break: break-all;*/
+    font-family: var(--panel-font-family);
+    font-size: 1.2rem;
+    padding: .2em 1em;
+    color: transparent;
+    text-shadow: 0 0 0 var(--panel-color);
+    outline: none;
+}
+
+#console-panel * {
+    word-break: break-all;
+    font-family: var(--panel-font-family);
+    font-size: 1.2rem;
+    padding: .2em 1em;
+}
+
+/*the style of editable p element */
+#console-panel > p.editable {
+    /*user-select: none;*/
+    cursor: default;
+}
+
+@keyframes inputPointer {
+    from {
+        border-bottom-style: solid;
+    }
+    to {
+        border-bottom-style: none;
+    }
+}
+
+#console-panel > p.editable::after {
+    content: " ";
+    display: inline-block;
+    width: 10px;
+    margin-left: 5px;
+    border-bottom: var(--panel-color) 7px solid;
+    animation-name: inputPointer;
+    animation-duration: .2s;
+    animation-timing-function: linear;
+    animation-direction: alternate;
+    animation-iteration-count: infinite;
+}
+
+#console-panel.cancel {
+    right: calc(-1 * var(--panel-width));
+}
+
+#console-panel-cancel-btn.cancel {
+    right: 0%;
+}

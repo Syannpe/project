@@ -29,7 +29,7 @@
     document.addEventListener("DOMContentLoaded", async function () {
         const main = this.querySelector("main");
 
-        fetch("./星井美希1T.data")
+        fetch("./5T.data")
             .then(res => res.json())
             .then(json => {
                 parseMap.parse(json, main);

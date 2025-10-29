@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Canvas 9-Slice & Combine Demo</title>
+    <style>
+        body { font-family: sans-serif; padding: 20px; }
+        .grid-canvas {
+            display: grid;
+            grid-template-columns: repeat(3, auto);
+            grid-template-rows: repeat(3, auto);
+            gap: 5px;
+            margin-bottom: 40px;
+        }
+        .grid-canvas canvas {
+            background: #f0f0f0;
+        }
+    </style>
+</head>
+<body>
+<h1>1. 将图片切成 9 份并分别显示（5px 间隙）</h1>
+<div class="grid-canvas" id="splitContainer">
+    <!-- 9 个 Canvas -->
+    <canvas width="0" height="0"></canvas>
+    <canvas width="0" height="0"></canvas>
+    <canvas width="0" height="0"></canvas>
+    <canvas width="0" height="0"></canvas>
+    <canvas width="0" height="0"></canvas>
+    <canvas width="0" height="0"></canvas>
+    <canvas width="0" height="0"></canvas>
+    <canvas width="0" height="0"></canvas>
+    <canvas width="0" height="0"></canvas>
+</div>
+
+
+<script>
+    // --- Part1: Split image into 9 pieces ---
+    const imgSrc = './1.jpg'; // 替换为你的图片地址
+    const img = new Image();
+    img.crossOrigin = 'anonymous';
+    img.src = imgSrc;
+    img.onload = () => {
+        const { width, height } = img;
+        const pieceW = Math.floor(width / 3);
+        const pieceH = Math.floor(height / 3);
+        const canvases = document.querySelectorAll('#splitContainer canvas');
+        canvases.forEach((c, i) => {
+            // 设置 canvas 大小
+            c.width = pieceW;
+            c.height = pieceH;
+
+            const ctx = c.getContext('2d');
+
+            // 计算行列
+            const row = Math.floor(i / 3);
+            const col = i % 3;
+            // 从原图绘制到各子画布
+            ctx.drawImage(
+                img,
+                col * pieceW, row * pieceH, pieceW, pieceH,
+                0, 0, pieceW, pieceH
+            );
+        });
+    };
+
+</script>
+</body>
+</html>

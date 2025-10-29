@@ -140,6 +140,24 @@ table.task tr td:is(.colored, .half-colored):is(.important) {
 }
 
 table.task tr td:is(.colored, .half-colored):is(.finished) {
-    background: #888;
+    background: #eee;
     box-shadow: none;
+}
+
+table.task {
+    border-collapse: collapse;
+    position: relative; /* 为伪元素提供定位上下文 */
+}
+
+table.task tr:has(td:is(.colored, .half-colored).finished) > td:first-child {
+    position: relative;
+}
+table.task tr:has(td:is(.colored, .half-colored).finished) > td::after {
+    content: "";
+    position: absolute;
+    bottom: 7px;
+    left: 0;
+    width: 100%;       /* 根据需要设置宽度，如 table 宽或更大 */
+    height: 4px;
+    background-color: #444;
 }

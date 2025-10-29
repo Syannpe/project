@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <link href="main.css" rel="stylesheet" type="text/css" />
-    <link href="menu.css" rel="stylesheet" type="text/css" />
-    <link href="notification-style.css" rel="stylesheet" type="text/css" />
+    <link href="main.css" rel="stylesheet" type="text/css"/>
+    <link href="menu.css" rel="stylesheet" type="text/css"/>
+    <link href="notification-style.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
 <!--
@@ -28,7 +28,7 @@
     foreach($json as $add=>$name){
         echo json_encode(selectdir($name,$add));
     }
-*/?>
+*/ ?>
 <main>
 
 </main>
@@ -36,31 +36,31 @@
     // import {unionMap} from "./UnionMap.js"
     import {parseMap} from "./ParseMap.js"
     import {notify} from "./notification.js"
-    document.addEventListener("DOMContentLoaded",function (){
+
+    document.addEventListener("DOMContentLoaded", function () {
         let unionMap = [
             <?php
-                include_once "selectdir.php";
-                include_once "handleFiles.php";
+            include_once "selectdir.php";
+            include_once "handleFiles.php";
 
-                $arr = handleFiles();
+            $arr = handleFiles();
 
-                $onlinePart = $arr[0];
-                $offlinePart = $arr[1];
-                $cantVisitPart = $arr[2];
+            $onlinePart = $arr[0];
+            $offlinePart = $arr[1];
+            $cantVisitPart = $arr[2];
             ?>
         ];
 
         notify.print(
-            "访问硬盘：<?php echo implode(",",$onlinePart)?><br />" +
-            "访问本地备份数据：<?php echo implode(",",$offlinePart)?><br />" +
-            "无法访问：<?php echo implode(",",$cantVisitPart)?>")
+            "访问硬盘：<?php echo implode(",", $onlinePart)?><br />" +
+            "访问本地备份数据：<?php echo implode(",", $offlinePart)?><br />" +
+            "无法访问：<?php echo implode(",", $cantVisitPart)?>")
 
         const main = this.querySelector("main");
 
 
-
         unionMap.forEach(map => {
-            parseMap.parse(map,main);
+            parseMap.parse(map, main);
 
 
             // for(let name in map){
@@ -73,12 +73,12 @@
 <script type="module" src="./searchBackUp.js"></script>
 <script type="module" src="./autoMatchAllBackUp.js"></script>
 <script type="module">
-    document.addEventListener("DOMContentLoaded",function (){
+    document.addEventListener("DOMContentLoaded", function () {
         const main = this.querySelector("main");
 
         const div = document.createElement("div");
         div.innerHTML = "返回上一级";
-        div.onclick = function (){
+        div.onclick = function () {
             location = "./index.html";
         }
 
