@@ -1,6 +1,6 @@
 (function (){
     document.getElementById("viewInWebGL2").onclick = function (){
         // alert();
-        location = "./index.html";
+        location = "./第五版目录.html";
     }
 })();

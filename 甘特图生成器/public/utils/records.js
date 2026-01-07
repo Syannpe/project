@@ -1,6 +1,5 @@
 import Task from "../models/Task.js";
 import Linear from "../operations/Linear.js";
-import After from "../decorators/After.js";
 /*
 * 工作安排逻辑：
 * 一天分三部分：就业，学校，自我提升
@@ -8,35 +7,26 @@ import After from "../decorators/After.js";
 * */
 // src/models/records.ts
 /*刷题，框架，面试宝典，劳动法*/
-const task1 = new Task("1", "驾照", new Date("2025-11-12"), new Date("2025-11-15"), new Date("2025-11-12"), new Date("2025-11-15"), 1, function (date, dayNumber) {
-    return dayNumber % 5 !== 0 && dayNumber % 5 !== 4;
+// 复现代码研究创新点，JS（框架，算法，面经），病情补助，银行卡办理，轮讲，
+const task1 = new Task("1", "复现代码研究创新点", new Date("2025-12-18"), new Date("2026-1-3"), new Date("2025-12-18"), new Date("2026-1-3"), .7, function (date, dayNumber) {
+    return date.getDay() !== 0 && date.getDay() !== 6;
 });
-const task2 = new Task("2", "软考", new Date("2025-10-29"), new Date("2025-11-8"), new Date("2025-10-29"), new Date("2025-11-8"), 1, function (date, dayNumber) {
-    return dayNumber % 2 !== 1;
+const task2 = new Task("2", "JS（框架，算法，面经）", new Date("2025-12-18"), new Date("2026-1-3"), new Date("2025-12-18"), new Date("2026-1-3"), .2, function (date, dayNumber) {
+    return date.getDay() !== 0 && date.getDay() !== 6;
 });
-const task3 = new Task("3", "论文", new Date("2025-10-29"), task1.earlyStart, new Date("2025-10-29"), task1.earlyStart, 1, function (date, dayNumber) {
-    return dayNumber % 2 === 1;
-});
-const task4 = new Task("4", "框架（琐碎的时间看）", new Date("2025-10-29"), task1.earlyStart, new Date("2025-10-29"), task1.earlyStart, .2, function (date, dayNumber) {
+const task3 = new Task("3", "轮讲", new Date("2025-12-21"), new Date("2025-12-24"), new Date("2025-12-21"), new Date("2025-12-24"), .8, null);
+const task4 = new Task("4", "病情补助", new Date("2026-1-2"), new Date("2026-1-3"), new Date("2026-1-2"), new Date("2026-1-3"), .5, function (date, dayNumber) {
     return dayNumber % 2 === 0;
 });
-const task5 = new Task("5", "办理提前退休（推迟）", new Date("2025-10-29"), new Date("2025-10-29"), new Date("2025-10-29"), new Date("2025-10-29"), .3, function (date, dayNumber) {
-    return dayNumber % 2 !== 0;
-});
-const task6 = new Task("6", "算法（推迟）", new Date("2025-10-29"), new Date("2025-10-29"), new Date("2025-10-29"), new Date("2025-10-29"), .5, function (date, dayNumber) {
-    return dayNumber % 2 === 0;
-});
-const task7 = new Task("7", "英语（推迟）", new Date("2025-10-29"), new Date("2025-10-29"), new Date("2025-10-29"), new Date("2025-10-29"), .3, function (date, dayNumber) {
+const task5 = new Task("5", "银行卡办理", new Date("2025-12-18"), new Date("2025-12-18"), new Date("2025-12-18"), new Date("2025-12-18"), .3, function (date, dayNumber) {
     // return dayNumber % 5 !== 2 && dayNumber % 5 !== 1;
     return dayNumber % 2 !== 0;
 });
 export const records = [
     [new Linear(task1)],
     [new Linear(task2)],
-    [new Linear(task3), new After(task2)],
-    [new Linear(task4), new After(task2)],
-    [new Linear(task5), new After(task2)],
-    [new Linear(task6)],
-    [new Linear(task7)],
+    [new Linear(task3)],
+    [new Linear(task4)],
+    [new Linear(task5)]
 ];
 //# sourceMappingURL=records.js.map

@@ -24,8 +24,8 @@ module.exports = {
     },
     plugins: [
         new HtmlWebpackPlugin({
-            template: path.resolve(__dirname, prefix, "./src/index.html"),
-            filename: path.resolve(__dirname, "./dist/index.html"),
+            template: path.resolve(__dirname, prefix, "./src/第五版目录.html"),
+            filename: path.resolve(__dirname, "./dist/第五版目录.html"),
             inject: 'body', // 确保 JS 被注入 body
         }),
         new HtmlInlineScriptPlugin(), // <-- 把 JS 内联到 HTML 中
