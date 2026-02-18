@@ -22,6 +22,12 @@ class 雨伞 extends TreeNode {
 class 碳素笔 extends TreeNode {
     name = this.constructor.name;
 }
+class 插排 extends TreeNode {
+    name = this.constructor.name;
+}
+class 泡面 extends TreeNode {
+    name = this.constructor.name;
+}
 class 日常用品 extends TreeNode {
     name = this.constructor.name;
     children = [];
@@ -35,7 +41,9 @@ class 日常用品 extends TreeNode {
         this.children.push(new 指甲刀());
         this.children.push(new 雨伞());
         this.children.push(new 碳素笔());
+        this.children.push(new 插排());
+        this.children.push(new 泡面());
     }
 }
-export { 日常用品, 水壶, 梳子, 雨伞, 碳素笔, 指甲刀 };
+export { 日常用品, 水壶, 梳子, 雨伞, 碳素笔, 指甲刀, 插排, 泡面 };
 //# sourceMappingURL=%E6%97%A5%E5%B8%B8%E7%94%A8%E5%93%81.js.map

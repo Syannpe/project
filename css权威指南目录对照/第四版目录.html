@@ -7,26 +7,22 @@
     <style>
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
-            line-height: 1.6;
             color: #333;
             max-width: 900px;
             margin: 0 auto;
             padding: 20px;
-            background-color: #f5f5f5;
         }
 
         .toc-container {
             background: white;
             padding: 30px;
             border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
         }
 
         h1, h2, h3 {
             margin: 0;
             padding: 8px 0;
             position: relative;
-            border-bottom: 1px solid #eee;
         }
 
         h1 {
@@ -82,10 +78,16 @@
             border-left: 4px solid #2196f3;
         }
 
-        /* 悬停效果 */
-        h1:hover, h2:hover, h3:hover {
-            background-color: rgba(0,0,0,0.02);
+        .sequence-old {
+            border: #999 dashed 3px;
+            color: #999;
         }
+
+        .sequence-new {
+            background-color: #eee;
+            border-left: 4px solid #555;
+        }
+
     </style>
 </head>
 <body>
@@ -94,7 +96,7 @@
     <h2>Preface. <span class="page-num">XIX</span></h2>
 
     <h1>1.CSS and Documents. <span class="page-num">1</span></h1>
-    <h2>ABriefHistory of(Web)Style <span class="page-num">1</span></h2>
+    <h2>A Brief History of (Web)Style <span class="page-num">1</span></h2>
     <h2>Elements <span class="page-num">3</span></h2>
     <h3>Replaced and Nonreplaced Elements <span class="page-num">3</span></h3>
     <h3>Element Display Roles <span class="page-num">3</span></h3>
@@ -391,7 +393,7 @@
     <h3>Limiting Width and Height <span class="page-num">532</span></h3>
     <h2>Content Overflow and Clipping <span class="page-num">534</span></h2>
     <h3>Overflow <span class="page-num">534</span></h3>
-    <h3>ElementVisibility <span class="page-num">536</span></h3>
+    <h2>Element Visibility <span class="page-num">536</span></h2>
     <h2>Absolute Positioning <span class="page-num">537</span></h2>
     <h3>Containing Blocks and Absolutely Positioned Elements <span class="page-num">537</span></h3>
     <h3>Placement and Sizing of Absolutely Positioned Elements <span class="page-num">540</span></h3>
@@ -401,86 +403,85 @@
     <h3>Placement on the Z-Axis <span class="page-num">550</span></h3>
     <h2>Fixed Positioning <span class="page-num">553</span></h2>
     <h2>Relative Positioning <span class="page-num">555</span></h2>
-    <h2>Sticky Positioning <span class class="page-num">557</span></h2>
-    <h3>Summary <span class="page-num">561</span></h3>
+    <h2>Sticky Positioning <span class="page-num">557</span></h2>
+    <h2>Summary <span class="page-num">561</span></h2>
 
     <h1>12.Flexible Box Layout. <span class="page-num">563</span></h1>
     <h2>FlexboxFundamentals <span class="page-num">563</span></h2>
     <h3>A SimpleExample <span class="page-num">565</span></h3>
-    <h3>Flex Containers <span class="page-num">569</span></h3>
+    <h2>Flex Containers <span class="page-num">569</span></h2>
     <h3>The flex-direction Property <span class="page-num">570</span></h3>
     <h3>Other Writing Directions <span class="page-num">574</span></h3>
     <h3>Wrapping Flex Lines <span class="page-num">576</span></h3>
     <h3>Defining Flexible Flows <span class="page-num">578</span></h3>
     <h3>flex-wrap Continued <span class="page-num">584</span></h3>
-    <h3>Arranging Flex Items <span class="page-num">586</span></h3>
+    <h2>Arranging Flex Items <span class="page-num">586</span></h2>
     <h2>Flex Container <span class="page-num">587</span></h2>
-    <h3>Justifying Content <span class="page-num">587</span></h3>
+    <h2>Justifying Content <span class="page-num">587</span></h2>
     <h3>justify-contentExamples <span class="page-num">594</span></h3>
-    <h3>Aligning Items <span class="page-num">596</span></h3>
+    <h2>Aligning Items <span class="page-num">596</span></h2>
     <h3>Start, End, and Center Alignment <span class="page-num">599</span></h3>
     <h3>Baseline Alignment <span class="page-num">601</span></h3>
-    <h3>AdditionalNotes <span class="page-num">602</span></h3>
-    <h3>The align-self Property <span class="page-num">602</span></h3>
-    <h3>Aligning Content <span class="page-num">604</span></h3>
+    <h3>Additional Notes <span class="page-num">602</span></h3>
+    <h2>The align-self Property <span class="page-num">602</span></h2>
+    <h2>Aligning Content <span class="page-num">604</span></h2>
     <h2>Flex Items <span class="page-num">609</span></h2>
-    <h3>What AreFlexItems? <span class="page-num">609</span></h3>
+    <h3>What Are FlexItems? <span class="page-num">609</span></h3>
     <h3>Flex Item Features <span class="page-num">611</span></h3>
-    <h3>MinimumWidths <span class="page-num">613</span></h3>
-    <h3>Flex-Item-SpecificProperties <span class="page-num">614</span></h3>
+    <h3>Minimum Widths <span class="page-num">613</span></h3>
+    <h2>Flex-Item-Specific Properties <span class="page-num">614</span></h2>
     <h2>The flex Property <span class="page-num">614</span></h2>
-    <h3>The flex-grow Property <span class="page-num">616</span></h3>
+    <h2>The flex-grow Property <span class="page-num">616</span></h2>
     <h3>Growth Factors and the flex Property <span class="page-num">619</span></h3>
-    <h3>The flex-shrink Property <span class="page-num">623</span></h3>
+    <h2>The flex-shrink Property <span class="page-num">623</span></h2>
     <h3>Proportional Shrinkage Based on Width and Shrink Factor <span class="page-num">626</span></h3>
     <h3>Differing Bases <span class="page-num">628</span></h3>
     <h3>Responsive Flexing <span class="page-num">630</span></h3>
-    <h3>The flex-basis Property <span class="page-num">633</span></h3>
-    <h3>ThecontentKeyword <span class="page-num">634</span></h3>
-    <h3>AutomaticFlexBasis <span class="page-num">635</span></h3>
+    <h2>The flex-basis Property <span class="page-num">633</span></h2>
+    <h3>The content Keyword <span class="page-num">634</span></h3>
+    <h3>Automatic Flex Basis <span class="page-num">635</span></h3>
     <h3>DefaultValues <span class="page-num">636</span></h3>
     <h3>Length Units <span class="page-num">637</span></h3>
     <h3>Zero Basis <span class="page-num">642</span></h3>
-    <h3>The flex Shorthand <span class="page-num">643</span></h3>
+    <h2>The flex Shorthand <span class="page-num">643</span></h2>
     <h3>Common Flex Values <span class="page-num">643</span></h3>
-    <h3>The order property <span class="page-num">648</span></h3>
+    <h2>The order property <span class="page-num">648</span></h2>
     <h3>Tabbed Navigation Revisited <span class="page-num">650</span></h3>
-    <h3>Summary <span class="page-num">652</span></h3>
 
     <h1>13. Grid Layout. <span class="page-num">655</span></h1>
     <h2>Creating a Grid Container <span class="page-num">655</span></h2>
-    <h3>Basic Grid Terminology <span class="page-num">658</span></h3>
-    <h3>Placing Grid Lines <span class="page-num">660</span></h3>
+    <h2>Basic Grid Terminology <span class="page-num">658</span></h2>
+    <h2>Placing Grid Lines <span class="page-num">660</span></h2>
     <h3>Fixed-Width Grid Tracks <span class="page-num">662</span></h3>
     <h3>Flexible Grid Tracks <span class="page-num">666</span></h3>
     <h3>Fitting Track Contents <span class="page-num">674</span></h3>
     <h3>Repeating Grid Lines <span class="page-num">676</span></h3>
-    <h3>GridAreas <span class="page-num">680</span></h3>
+    <h3>Grid Areas <span class="page-num">680</span></h3>
     <h2>Attaching Elements to the Grid <span class="page-num">686</span></h2>
     <h3>Using Column and Row Lines <span class="page-num">687</span></h3>
-    <h3>Row and ColumnShorthands <span class="page-num">692</span></h3>
+    <h3>Row and Column Shorthands <span class="page-num">692</span></h3>
     <h3>The Implicit Grid <span class="page-num">694</span></h3>
     <h3>Error Handling <span class="page-num">697</span></h3>
     <h3>Using Areas <span class="page-num">698</span></h3>
     <h3>Grid Item Overlap <span class="page-num">701</span></h3>
-    <h3>GridFlow <span class="page-num">702</span></h3>
-    <h3>AutomaticGrid Lines <span class="page-num">708</span></h3>
-    <h3>The grid Shorthand <span class="page-num">710</span></h3>
+    <h2>Grid Flow <span class="page-num">702</span></h2>
+    <h2>Automatic Grid Lines <span class="page-num">708</span></h2>
+    <h2>The grid Shorthand <span class="page-num">710</span></h2>
     <h3>Subgrids <span class="page-num">713</span></h3>
     <h2>Opening Grid Spaces <span class="page-num">714</span></h2>
     <h3>Grid Gutters (or Gaps) <span class="page-num">714</span></h3>
-    <h2>Grid Items and the Box Model <span class="page-num">716</span></h2>
+    <h3>Grid Items and the Box Model <span class="page-num">716</span></h3>
     <h2>Aligning and Grids <span class="page-num">721</span></h2>
     <h3>Aligning and Justifying Individual Items <span class="page-num">722</span></h3>
     <h3>Aligning and Justifying All Items <span class="page-num">723</span></h3>
-    <h3>Layering and Ordering <span class="page-num">727</span></h3>
-    <h3>Summary <span class="page-num">729</span></h3>
+    <h2>Layering and Ordering <span class="page-num">727</span></h2>
+    <h2>Summary <span class="page-num">729</span></h2>
 
     <h1>14. Table Layout in CSS. <span class="page-num">731</span></h1>
     <h2>Table Formatting <span class="page-num">731</span></h2>
     <h3>Visually Arranging a Table <span class="page-num">731</span></h3>
-    <h3>TableDisplayValues <span class="page-num">733</span></h3>
-    <h3>AnonymousTableObjects <span class="page-num">738</span></h3>
+    <h3>Table Display Values <span class="page-num">733</span></h3>
+    <h3>Anonymous Table Objects <span class="page-num">738</span></h3>
     <h3>Table Layers <span class="page-num">742</span></h3>
     <h3>Captions <span class="page-num">744</span></h3>
     <h2>Table Cell Borders <span class="page-num">745</span></h2>
@@ -490,20 +491,20 @@
     <h3>Width <span class="page-num">755</span></h3>
     <h3>Height <span class="page-num">761</span></h3>
     <h3>Alignment <span class="page-num">762</span></h3>
-    <h3>Summary <span class="page-num">766</span></h3>
+    <h2>Summary <span class="page-num">766</span></h2>
 
     <h1>15.Lists and Generated Content. <span class="page-num">767</span></h1>
     <h2>Lists <span class="page-num">767</span></h2>
     <h3>Types of Lists <span class="page-num">768</span></h3>
     <h3>List Item Images <span class="page-num">771</span></h3>
     <h3>List-Marker Positions <span class="page-num">774</span></h3>
-    <h3>List StylesinShorthand <span class="page-num">775</span></h3>
+    <h3>List Styles in Shorthand <span class="page-num">775</span></h3>
     <h3>List Layout <span class="page-num">776</span></h3>
     <h2>Generated Content <span class="page-num">779</span></h2>
     <h3>Inserting Generated Content <span class="page-num">780</span></h3>
     <h3>Specifying Content <span class="page-num">783</span></h3>
     <h3>Counters <span class="page-num">788</span></h3>
-    <h3>Defining Counting Patterns <span class="page-num">796</span></h3>
+    <h2>Defining Counting Patterns <span class="page-num">796</span></h2>
     <h3>Fixed Counting Patterns <span class="page-num">798</span></h3>
     <h3>Cyclic Counting Patterns <span class="page-num">800</span></h3>
     <h3>Symbolic Counting Patterns <span class="page-num">803</span></h3>
@@ -512,7 +513,7 @@
     <h3>Additive Counting Patterns <span class="page-num">812</span></h3>
     <h3>Extending Counting Patterns <span class="page-num">814</span></h3>
     <h3>Speaking Counting Patterns <span class="page-num">815</span></h3>
-    <h3>Summary <span class="page-num">817</span></h3>
+    <h2>Summary <span class="page-num">817</span></h2>
 
     <h1>16.Transforms. <span class="page-num">819</span></h1>
     <h2>CoordinateSystems <span class="page-num">819</span></h2>
@@ -523,33 +524,32 @@
     <h3>Choosing a 3D Style <span class="page-num">845</span></h3>
     <h3>Changing Perspective <span class="page-num">847</span></h3>
     <h3>Dealing with Backfaces <span class="page-num">852</span></h3>
-    <h3>Summary <span class="page-num">854</span></h3>
+    <h2>Summary <span class="page-num">854</span></h2>
 
     <h1>17.Transitions. <span class="page-num">855</span></h1>
     <h2>CSS Transitions <span class="page-num">855</span></h2>
-    <h3>Transition Properties <span class="page-num">857</span></h3>
+    <h2>Transition Properties <span class="page-num">857</span></h2>
     <h3>Limiting Transition Effects by Property <span class="page-num">861</span></h3>
     <h3>Setting Transition Duration <span class="page-num">867</span></h3>
     <h3>Altering theInternal Timing of Transitions <span class="page-num">869</span></h3>
     <h3>Delaying Transitions <span class="page-num">875</span></h3>
     <h3>The transition Shorthand <span class="page-num">878</span></h3>
-    <h3>In Reverse: Transitioning Back to Baseline <span class="page-num">880</span></h3>
-    <h3>AnimatableProperties andValues <span class="page-num">884</span></h3>
-    <h3>HowPropertyValuesAreInterpolated <span class="page-num">885</span></h3>
-    <h3>Fallbacks:TransitionsAreEnhancements <span class="page-num">888</span></h3>
-    <h3>Printing Transitions <span class="page-num">889</span></h3>
-    <h2>Summary <span class="page-num">889</span></h2>
+    <h2>In Reverse: Transitioning Back to Baseline <span class="page-num">880</span></h2>
+    <h2>AnimatableProperties andValues <span class="page-num">884</span></h2>
+    <h3>How Property Values Are Interpolated <span class="page-num">885</span></h3>
+    <h2>Fallbacks:TransitionsAreEnhancements <span class="page-num">888</span></h2>
+    <h2>Printing Transitions <span class="page-num">889</span></h2>
 
     <h1>18. Animation. <span class="page-num">891</span></h1>
     <h2>Defining Keyframes <span class="page-num">892</span></h2>
-    <h3>Setting UpKeyframe Animations <span class="page-num">893</span></h3>
+    <h2>Setting UpKeyframe Animations <span class="page-num">893</span></h2>
     <h3>Naming Your Animation <span class="page-num">894</span></h3>
-    <h3>KeyframeSelectors <span class="page-num">894</span></h3>
+    <h2>Keyframe Selectors <span class="page-num">894</span></h2>
     <h3>Omitting from and to Values <span class="page-num">895</span></h3>
     <h3>Repeating Keyframe Properties <span class="page-num">897</span></h3>
     <h3>Animatable Properties <span class="page-num">897</span></h3>
     <h3>Nonanimatable Properties That Aren't Ignored <span class="page-num">899</span></h3>
-    <h2>Scripting @keyframes Animations <span class="page-num">899</span></h2>
+    <h3>Scripting @keyframes Animations <span class="page-num">899</span></h3>
     <h2>Animating Elements <span class="page-num">900</span></h2>
     <h3>Naming Animations <span class="page-num">901</span></h3>
     <h3>Defining Animation Lengths <span class="page-num">904</span></h3>
@@ -559,20 +559,19 @@
     <h3>Animation Events <span class="page-num">911</span></h3>
     <h3>Changing the Internal Timing of Animations <span class="page-num">920</span></h3>
     <h3>Setting the Animation Play State <span class="page-num">932</span></h3>
-    <h3>AnimationFill Modes <span class="page-num">933</span></h3>
-    <h3>Bringing It All Together <span class="page-num">935</span></h3>
-    <h3>Animation, Specificity, and Precedence Order <span class="page-num">939</span></h3>
+    <h3>Animation Fill Modes <span class="page-num">933</span></h3>
+    <h2>Bringing It All Together <span class="page-num">935</span></h2>
+    <h2>Animation, Specificity, and Precedence Order <span class="page-num">939</span></h2>
     <h3>Specificity and !important <span class="page-num">939</span></h3>
     <h3>Animation Order <span class="page-num">939</span></h3>
     <h3>AnimationIteration and display:none; <span class="page-num">940</span></h3>
     <h3>Animation and theUI Thread <span class="page-num">940</span></h3>
-    <h3>Seizure and Vestibular Disorders <span class="page-num">941</span></h3>
-    <h3>Animation Events and Prefixing <span class="page-num">942</span></h3>
+    <h2>Seizure and Vestibular Disorders <span class="page-num">941</span></h2>
+    <h2>Animation Events and Prefixing <span class="page-num">942</span></h2>
     <h3>animationstart <span class="page-num">942</span></h3>
     <h3>animationend <span class="page-num">942</span></h3>
     <h3>animationiteration <span class="page-num">943</span></h3>
-    <h3>Printing Animations <span class="page-num">943</span></h3>
-    <h2>Summary <span class="page-num">943</span></h2>
+    <h2>Printing Animations <span class="page-num">943</span></h2>
 
     <h1>19. Filters, Blending, Clipping, and Masking <span class="page-num">945</span></h1>
     <h2>CSS Filters <span class="page-num">945</span></h2>
@@ -587,14 +586,14 @@
     <h3>Hard and Soft Light <span class="page-num">956</span></h3>
     <h3>Color Dodge and Burn <span class="page-num">957</span></h3>
     <h3>Hue, Saturation, Luminosity, and Color <span class="page-num">959</span></h3>
-    <h3>Blending Backgrounds <span class="page-num">960</span></h3>
+    <h2>Blending Backgrounds <span class="page-num">960</span></h2>
     <h3>Blending in Isolation <span class="page-num">963</span></h3>
     <h2>Clipping and Masking <span class="page-num">964</span></h2>
     <h3>Clipping <span class="page-num">965</span></h3>
     <h3>Clip Shapes <span class="page-num">966</span></h3>
     <h3>Clip Boxes <span class="page-num">967</span></h3>
     <h3>Clip Filling Rules <span class="page-num">970</span></h3>
-    <h3>Masks <span class="page-num">971</span></h3>
+    <h2>Masks <span class="page-num">971</span></h2>
     <h3>Defining a Mask <span class="page-num">972</span></h3>
     <h3>Changing the Mask's Mode <span class="page-num">974</span></h3>
     <h3>Sizing and Repeating Masks <span class="page-num">976</span></h3>
@@ -603,20 +602,19 @@
     <h3>Bringing It All Together <span class="page-num">984</span></h3>
     <h3>Mask Types <span class="page-num">985</span></h3>
     <h3>Border-image Masking <span class="page-num">986</span></h3>
-    <h3>Object Fitting and Positioning <span class="page-num">987</span></h3>
-    <h3>Summary <span class="page-num">989</span></h3>
+    <h2>Object Fitting and Positioning <span class="page-num">987</span></h2>
 
     <h1>20. Media-Dependent Styles... <span class="page-num">991</span></h1>
     <h2>Defining Media-Dependent Styles <span class="page-num">991</span></h2>
     <h3>BasicMedia Queries <span class="page-num">991</span></h3>
     <h3>Complex Media Queries <span class="page-num">994</span></h3>
-    <h3>Paged Media <span class="page-num">1002</span></h3>
+    <h2>Paged Media <span class="page-num">1002</span></h2>
     <h3>Print Styles <span class="page-num">1002</span></h3>
-    <h3>Summary <span class="page-num">1016</span></h3>
+    <h2>Summary <span class="page-num">1016</span></h2>
 
     <h1>A. Animatable Properties. <span class="page-num">1017</span></h1>
     <h1>B. Basic Property Reference. <span class="page-num">1025</span></h1>
-    <h1>C.Color EquivalenceTable. <span class="page-num">1035</span></h1>
+    <h1>C. Color EquivalenceTable. <span class="page-num">1035</span></h1>
     <h1>Index. <span class="page-num">1039</span></h1>
 </div>
 </body>

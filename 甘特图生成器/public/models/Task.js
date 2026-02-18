@@ -5,25 +5,30 @@
  * @Author: SYANNPE
  */
 export default class Task {
-    id;
     name;
+    proportion;
     earlyStart;
     earlyEnd;
     lateStart;
     lateEnd;
-    proportion;
     equation;
+    static id = 0; //默认分配ID
+    id;
     color; // 渲染颜色
-    constructor(id, name, earlyStart, earlyEnd, lateStart, lateEnd, proportion, // 进度比例
-    equation) {
-        this.id = id;
+    constructor(name, proportion, // 进度比例
+    earlyStart, earlyEnd, lateStart, lateEnd, equation) {
         this.name = name;
+        this.proportion = proportion;
         this.earlyStart = earlyStart;
         this.earlyEnd = earlyEnd;
         this.lateStart = lateStart;
         this.lateEnd = lateEnd;
-        this.proportion = proportion;
         this.equation = equation;
+        if (!this.lateStart)
+            this.lateStart = this.earlyStart;
+        if (!this.lateEnd)
+            this.lateEnd = this.earlyEnd;
+        this.id = ++Task.id;
         const r = Math.floor(Math.random() * 128) + 128;
         const g = Math.floor(Math.random() * 128) + 128;
         const b = Math.floor(Math.random() * 128) + 128;

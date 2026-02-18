@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <style>
+/*导航*/
+        header, header > nav, main {
+            /*border: red solid 1 px;*/
+        }
+
+        header {
+            width: 100%;
+            display: flex;
+        }
+
+        header > nav {
+            padding: 1em 2em;
+            border-bottom: none;
+            position: relative;
+        }
+
+        header > nav:after {
+            content: "";
+            display: block;
+
+            position: absolute;
+            bottom: 0;
+            margin-left: -2em;
+            border-bottom: #647eff solid 0px;
+            opacity: 1;
+            width: 0;
+            transition: .3s;
+        }
+
+        header > nav:hover:after {
+            border-bottom: #647eff solid 4px;
+            width: 100%;
+            opacity: 1;
+        }
+
+        header > nav:nth-of-type(2):after {
+            border-bottom: #647eff solid 4px;
+            width: 100%;
+            opacity: 1;
+        }
+
+        header > nav:hover {
+            cursor: pointer;
+        }
+    </style>
+    <style>
+        /*总体布局*/
+        body{
+            background-image:url("2.jpg");
+        }
+        #container {
+            border-radius: 10px;
+            margin:10px;
+            padding:2rem;
+            background: #fffc;
+
+            display: grid;
+
+            grid:
+            "header aside" auto
+            "main   aside" 1fr/
+            3fr 1fr;
+        }
+
+        #container > header {
+            grid-area: header;
+        }
+
+        #container > main {
+            grid-area: main;
+        }
+
+        #container > aside {
+            grid-area: aside;
+        }
+    </style>
+</head>
+<body>
+
+
+<template id="article-temp">
+    <style>
+        article {
+            /*border: solid 1px red;*/
+            padding: 1em 3em;
+            overflow: auto;
+        }
+
+        article > .article-image-container {
+            /*border: solid 1px red;*/
+            margin: .5rem 0;
+
+            /*用于瀑布流布局中空格不留白*/
+            line-height: 0;
+        }
+
+        /*针对一个图片的布局*/
+        article:has(>.article-image-container .article-image:only-of-type) {
+            display: grid;
+            grid:
+                "img title" 3fr
+                "img footer" 2fr/
+                auto 1fr;
+
+        }
+
+        article > .article-image-container:has( .article-image:only-of-type) {
+            grid-area: img;
+            border-radius: 9px 9px 9px 9px;
+            margin: 0 20px 0 0;
+
+        }
+
+        /*只有一个图的标题*/
+        article > .article-image-container:has( .article-image:only-of-type) > .article-title {
+            grid-area: title;
+        }
+
+        /*只有一个图的角标*/
+        article > .article-image-container:has( .article-image:only-of-type) > .article-footer {
+            grid-area: footer;
+        }
+
+        article > .article-image-container .article-image {
+            display: inline-block;
+            width: 20vw;
+            height: 20vh;
+            min-height: 130px;
+            min-width: 200px;
+
+            overflow: hidden;
+            /*border: solid 1px red;*/
+            text-align: center;
+            margin: 0 .5rem;
+
+        }
+
+        article > .article-image-container .article-image:first-of-type {
+            border-radius: 9px 2px 2px 9px;
+            margin: 0 .5rem 0 0;
+        }
+
+        article > .article-image-container .article-image:last-of-type {
+            border-radius: 2px 9px 9px 2px;
+            margin: 0 0 0 .5rem;
+        }
+
+        article > .article-image-container .article-image:only-of-type {
+            border-radius: 9px 9px 9px 9px;
+            margin: 0;
+            display: block;
+        }
+
+        article img {
+            max-width: 100%;
+            max-height: 100%;
+        }
+
+        article > .article-title {
+            font-family: "微软雅黑", serif;
+            font-size: 1.3rem;
+            margin: 1rem 0;
+        }
+
+        article > .article-footer {
+            font-size: .8rem;
+            color: #888;
+            margin: 1rem 0;
+
+            display: flex;
+            justify-content: space-between;
+        }
+
+    </style>
+
+    <article>
+        <p class="article-title">
+            <slot name="title"></slot>
+        </p>
+
+        <div class="article-image-container">
+            <!--            <div class="article-image"><img src="2.jpg"/></div>-->
+            <!--            <slot name="img"></slot>-->
+        </div>
+        <p class="article-footer"><span class="article-footer-time"><slot name="time"></slot></span><span
+                class="article-footer-play">播报</span></p>
+    </article>
+</template>
+<template id="list-temp">
+    <style>
+        .list-captions {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .list-captions > .list-captions-content {
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+        .list-captions > .list-captions-change {
+            color: #888;
+            font-size: .9rem;
+        }
+
+        .list-main {
+            padding-inline-start: 1.5rem;
+        }
+
+        .list-main li {
+            margin: .4rem;
+        }
+
+        .list-main li:first-child::marker,
+        .list-main li:nth-child(2)::marker {
+            color: red
+        }
+
+        .list-main li:nth-child(3)::marker {
+            color: orange;
+        }
+
+        .list-main li::marker {
+            color: #aaa;
+
+        }
+
+    </style>
+    <div>
+        <p class="list-captions"><span class="list-captions-content">热搜榜单</span><span
+                class="list-captions-change">换一换</span></p>
+
+        <ol class="list-main">
+            <!--<li>列车员称山东人穷 铁路部门致歉调查核实</li>
+            <li>青岛小伙营救落水母子不幸溺亡</li>
+            <li>中塞"铁杆"友谊之路越走越宽</li>
+            <li>泰国警察绑架5名中国游客勒索【热】</li>
+            <li>为中匈友好合作开辟新篇章</li>
+            <li>我iPad也要低人一等了</li>
+            <li>男子地铁抽烟扬言判无期刚出来</li>
+            <li>中介半年没开单上吊自杀?谣言</li>
+            <li>眼泪女王没获奖的原因</li>-->
+            <!--            <slot name="list-items"></slot>-->
+        </ol>
+
+    </div>
+</template>
+
+<div id="container">
+    <header>
+        <nav>我的关注</nav>
+        <nav>推荐</nav>
+    </header>
+    <main>
+        <my-article>
+            <span slot="title">阿根廷10000比索面额纸币开始流通</span>
+            <span slot="time">极目新闻 05-08 00:46</span>
+        </my-article>
+        <my-article>
+            <span slot="title">2024高考倒计时一个月！这些信息要掌握</span>
+
+            <img src="2.jpg">
+            <span slot="time">中国新闻网 05-07 10:51</span>
+        </my-article>
+        <my-article>
+            <span slot="title">中国撤侨是免费的，唯独有一次收费了？网友：活该，多收点才好</span>
+            <img src="2.jpg">
+            <img src="2.jpg">
+            <img src="2.jpg">
+            <span slot="time">兆易蓉卫部茨 05-01 21:51</span>
+        </my-article>
+    </main>
+    <aside>
+        <my-list>
+            <li>列车员称山东人穷 铁路部门致歉调查核实</li>
+            <li>青岛小伙营救落水母子不幸溺亡</li>
+            <li>中塞"铁杆"友谊之路越走越宽</li>
+            <li>泰国警察绑架5名中国游客勒索【热】</li>
+            <li>为中匈友好合作开辟新篇章</li>
+            <li>我iPad也要低人一等了</li>
+            <li>男子地铁抽烟扬言判无期刚出来</li>
+            <li>中介半年没开单上吊自杀?谣言</li>
+            <li>眼泪女王没获奖的原因</li>
+        </my-list>
+    </aside>
+</div>
+
+<script type="module">
+    customElements.define("my-article", class extends HTMLElement {
+        constructor() {
+            super();
+
+            const template = document.getElementById("article-temp");
+            const content = template.cloneNode(true).content;
+            const imageCon = content.querySelector(".article-image-container")
+
+            const images = Array.from(this.querySelectorAll("img"));
+            images.forEach(img => {
+                // <div class="article-image"><img src="2.jpg"/></div>
+                const div = document.createElement("div");
+                div.className = "article-image"
+                const image = new Image();
+                image.src = "2.jpg"
+                div.appendChild(image);
+                imageCon.appendChild(div)
+            })
+
+            this.attachShadow({mode: "open"}).appendChild(content);
+
+        }
+    })
+    customElements.define("my-list", class extends HTMLElement {
+        constructor() {
+            super();
+
+            const template = document.getElementById("list-temp");
+            const content = template.cloneNode(true).content;
+            const imageCon = content.querySelector(".list-main")
+
+            const lis = Array.from(this.querySelectorAll("li"));
+            lis.forEach(li => {
+                // <div class="article-image"><img src="2.jpg"/></div>
+                const liEle = document.createElement("li");
+                liEle.textContent = li.textContent;
+
+                imageCon.appendChild(liEle)
+            })
+
+            this.attachShadow({mode: "open"}).appendChild(content);
+
+        }
+    })
+    document.addEventListener("DOMContentLoaded", function () {
+    });
+</script>
+</body>
+</html>

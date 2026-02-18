@@ -15,7 +15,7 @@
 
         const image = new Image();
         image.src = "" +
-            "img_2.jpg" +
+            "原皮竖3.jpg" +
             "";
         image.onload = function () {
             canvas.width = this.width;
@@ -26,6 +26,15 @@
 
             let imageData = c.getImageData(0, 0, canvas.width, canvas.height);
             for (let i = 0, len = imageData.data.length; i < len; i += 4) {
+                if (imageData.data[i + 0] > 140 &&
+                    imageData.data[i + 1] > 140 &&
+                    imageData.data[i + 2] > 140
+                ) {
+                    imageData.data[i + 0] += 255;
+                    imageData.data[i + 1] += 255;;
+                    imageData.data[i + 2] += 255;;
+                    imageData.data[i + 3] = 0;
+                }
                 /*if(imageData.data[i + 0] === 255 &&
                     imageData.data[i + 1] === 255 &&
                     imageData.data[i + 2] === 255 ){
@@ -40,14 +49,14 @@
                        imageData.data[i + 2] = 0;
                        imageData.data[i + 3] = 255;
                    }*/
-                if ((imageData.data[i + 0] === imageData.data[i + 1] &&
+                /*if ((imageData.data[i + 0] === imageData.data[i + 1] &&
                         imageData.data[i + 1] === imageData.data[i + 2]) &&
                     imageData.data[i] > 150) {
                     imageData.data[i + 0] = 255;
                     imageData.data[i + 1] = 0;
                     imageData.data[i + 2] = 0;
                     imageData.data[i + 3] = 0;
-                }
+                }*/
                 /* if (Math.hypot(
                      imageData.data[i + 3]) < EPSILON) {
 

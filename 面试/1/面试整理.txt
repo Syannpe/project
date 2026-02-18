@@ -1,0 +1,106 @@
+第一题算法题
+//  输入一个字符串，输出最长回文子串
+//  输入abac，输出aba
+
+const isHuiwen = function (str){
+	for(let i = 0, len = str.length; i<Math.floor(len/2); i++){
+		if(str[i] !== str[len - 1 - i])return false;
+		
+	}
+
+	return true;
+}
+
+const foo = function (str){
+	const max = 0;
+	for(let start = 0;i<str.length;i++){
+		for(let end = i;j < str.length;j++){
+			if(isHuiwen(str.slice(start, end))){
+				max = end - start;		//On3	
+			}
+		}
+	}
+		
+	return max;
+};
+
+console.log()
+
+
+const bar = function (str){
+	const max = 0;
+	for(let index = 0;index<str.length;index++){
+		for(let delta = 0; index-delta >= 0 && index+delta < str.length; delta++){
+			if(str[index-delta] !== str[index+delta]) break;
+
+			max = Math.max(max, delta * 2 + 1);
+
+			if(str[index-delta] !== str[index+1+delta]) break;
+
+			max = Math.max(max, delta * 2 + 2);
+		}
+
+		//双数
+		//for(let delta = 0; index-delta >= 0 && index+1+delta < str.length; delta++){
+//
+		//}
+	}
+
+	return max;
+}
+
+console.log(bar("aabbaa"))
+
+
+口述提：
+1：oauth2是什么
+2：解释一下vue中的双向绑定
+
+Object.setPropertyOf();
+reative({})
+
+const p = new Proxy({});
+shallowReative();
+
+
+const p = new weakRef(new Proxy({}));
+
+3：解释一下虚拟dom
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

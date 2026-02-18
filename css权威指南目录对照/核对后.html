@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS目录结构</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+            color: #333;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .toc-container {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+        }
+
+        h1, h2, h3 {
+            margin: 0;
+            padding: 8px 0;
+            position: relative;
+        }
+
+        h1 {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #000;
+            margin-top: 30px;
+            padding-left: 0;
+            text-indent: 0;
+        }
+
+        h1:first-child {
+            margin-top: 0;
+        }
+
+        h2 {
+            font-size: 1.1rem;
+            font-weight: 500;
+            color: #333;
+            padding-left: 20px;
+            text-indent: 0;
+        }
+
+        h3 {
+            font-size: 1rem;
+            font-weight: normal;
+            color: #555;
+            padding-left: 40px;
+            text-indent: 0;
+        }
+
+        .page-num {
+            position: absolute;
+            right: 0;
+            color: #999;
+            font-size: 0.9em;
+        }
+
+        /* 状态类样式 */
+        .add {
+            background-color: #e8f5e9;
+            border-left: 4px solid #4caf50;
+        }
+
+        .remove {
+            background-color: #f5f5f5;
+            border-left: 4px solid #9e9e9e;
+            opacity: 0.7;
+        }
+
+        .change {
+            background-color: #e3f2fd;
+            border-left: 4px solid #2196f3;
+        }
+
+        .page-change {
+            font-weight: bold;
+            color: #ff5722;
+        }
+
+        .sequence-old {
+            border: #999 dashed 3px;
+            color: #999;
+        }
+
+        .sequence-new {
+            background-color: #eee;
+            border-left: 4px solid #555;
+        }
+
+    </style>
+</head>
+<body>
+<div class="toc-container">
+    <h1>Table of Contents <span class="page-num"></span></h1>
+
+    <h1>1.CSS Fundamentals. <span class="page-num">1</span></h1>
+    <h2>A Brief History of (Web)Style <span class="page-num">1</span></h2>
+    <h2 class="add">Stylesheet Contents <span class="page-num">2</span></h2>
+    <h3 class="add">Rule Structure <span class="page-num">2</span></h3>
+    <h3 class="add">Vendor Prefixing <span class="page-num">3</span></h3>
+    <h3 class="add">Whitespace Handling <span class="page-num">4</span></h3>
+    <h3 class="add">CSS Comments <span class="page-num">5</span></h3>
+    <h3 class="add">Markup <span class="page-num">6</span></h3>
+    <h2>Elements <span class="page-num">7</span></h2>
+    <h3>Replaced and Nonreplaced Elements <span class="page-num">7</span></h3>
+    <h3>Element Display Roles <span class="page-num">7</span></h3>
+    <h2>Bringing CSS and HTML Together <span class="page-num">11</span></h2>
+    <h3>The &lt;link&gt; Tag <span class="page-num">12</span></h3>
+    <h3>The&lt;style&gt;Element <span class="page-num">16</span></h3>
+    <h3>The @import Directive <span class="page-num">16</span></h3>
+    <h3>HTTP Linking <span class="page-num">18</span></h3>
+    <h3>Inline Styles <span class="page-num">19</span></h3>
+    <h2>Summary <span class="page-num">19</span></h2>
+
+    <h1>2. Selectors<span class="page-num">21</span></h1>
+    <h2>Basic Style Rules <span class="page-num">21</span></h2>
+    <h2 class="change">Type Selectors <span class="page-num">22</span></h2>
+    <h2>Grouping <span class="page-num">23</span></h2>
+    <h3>Grouping Selectors <span class="page-num">23</span></h3>
+    <h3>Grouping Declarations <span class="page-num">24</span></h3>
+    <h3>Grouping Everything <span class="page-num">25</span></h3>
+    <h3 class="remove">New Elements in Old Browsers <span class="page-num">38</span></h3>
+    <h2>Class and ID Selectors <span class="page-num">27</span></h2>
+    <h3>Class Selectors <span class="page-num">28</span></h3>
+    <h3>Multiple Classes <span class="page-num">30</span></h3>
+    <h3 class="change">IDSelectors <span class="page-num">32</span></h3>
+    <h3>Deciding Between Class and ID <span class="page-num">33</span></h3>
+    <h2>AttributeSelectors <span class="page-num">34</span></h2>
+    <h3>Simple Attribute Selectors <span class="page-num">34</span></h3>
+    <h3>Selection Based on Exact Attribute Value <span class="page-num">35</span></h3>
+    <h3>Selection Based on Partial Attribute Values <span class="page-num">37</span></h3>
+    <h3 class="remove">A Particular Attribute Selection Type <span class="page-num">48</span></h3>
+    <h3>The Case-Insensitivity Identifier <span class="page-num">42</span></h3>
+    <h2>Using Document Structure <span class="page-num">42</span></h2>
+    <h3>Understanding the Parent-Child Relationship <span class="page-num">43</span></h3>
+    <h3 class="change">Defining Descendant Selectors <span class="page-num">45</span></h3>
+    <h3>Selecting Children <span class="page-num">47</span></h3>
+    <h3 class="change">Selecting Adjacent-Sibling Elements <span class="page-num">48</span></h3>
+    <h3 class="change">Selecting Following Siblings <span class="page-num">50</span></h3>
+    <h2>Summary <span class="page-num">51</span></h2>
+
+    <h1 class="add">3.Pseudo-Class and -Element Selectors. <span class="page-num">53</span></h1>
+    <h2 class="add">Pseudo-Class Selectors <span class="page-num">53</span></h2>
+    <h3 class="add">Combining Pseudo-Classes <span class="page-num">54</span></h3>
+    <h3 class="add">Structural Pseudo-Classes <span class="page-num">54</span></h3>
+    <h3 class="add">Location Pseudo-Classes <span class="page-num">68</span></h3>
+    <h3 class="add">User Action Pseudo-Classes <span class="page-num">74</span></h3>
+    <h3 class="add">UI-State Pseudo-Classes <span class="page-num">77</span></h3>
+    <h3 class="add">The :lang() and :dir() Pseudo-Classes <span class="page-num">83</span></h3>
+    <h3 class="add">Logical Pseudo-Classes <span class="page-num">84</span></h3>
+    <h3 class="add">The :has() Pseudo-Class <span class="page-num">89</span></h3>
+    <h3 class="add">Other Pseudo-Classes <span class="page-num">94</span></h3>
+    <h2 class="add">Pseudo-Element Selectors <span class="page-num">95</span></h2>
+    <h3 class="add">Styling the First Letter <span class="page-num">95</span></h3>
+    <h3 class="add">Styling the First Line <span class="page-num">96</span></h3>
+    <h3 class="add">Restrictions on :first-letter and ::first-line <span class="page-num">97</span></h3>
+    <h3 class="add">The Placeholder Text Pseudo-Element <span class="page-num">97</span></h3>
+    <h3 class="add">The Form Button Pseudo-Element <span class="page-num">98</span></h3>
+    <h3 class="add">Generating Content Before and After Elements <span class="page-num">98</span></h3>
+    <h3 class="add">Highlight Pseudo-Elements <span class="page-num">99</span></h3>
+    <h3 class="add">The Backdrop Pseudo-Element <span class="page-num">101</span></h3>
+    <h3 class="add">TheVideo-Cue Pseudo-Element <span class="page-num">102</span></h3>
+    <h2 class="add">ShadowPseudo-Classes and-Elements <span class="page-num">103</span></h2>
+    <h3 class="add">Shadow Pseudo-Classes <span class="page-num">103</span></h3>
+    <h3 class="add">ShadowPseudo-Elements <span class="page-num">104</span></h3>
+    <h2 class="add">Summary <span class="page-num">105</span></h2>
+
+    <h1>4.Specifcity,Inheritance,and the Cascade. <span class="page-num">107</span></h1>
+    <h2>Specificity <span class="page-num">107</span></h2>
+    <h3>Declarations and Specificity <span class="page-num">109</span></h3>
+    <h3>Resolving Multiple Matches <span class="page-num">111</span></h3>
+    <h3 class="add">Zeroed Selector Specificity <span class="page-num">111</span></h3>
+    <h3 class="change">ID and Attribute Selector Specificity <span class="page-num">112</span></h3>
+    <h3>Importance <span class="page-num">112</span></h3>
+    <h2>Inheritance <span class="page-num">113</span></h2>
+    <h2>The Cascade <span class="page-num">116</span></h2>
+    <h3 class="change">Sorting by Importance and Origin <span class="page-num">118</span></h3>
+    <h3 class="add">Sorting by Element Attachment <span class="page-num">119</span></h3>
+    <h3 class="add">Sorting by Cascade Layer <span class="page-num">119</span></h3>
+    <h3>Sorting by Specificity <span class="page-num">123</span></h3>
+    <h3>Sortingby Order <span class="page-num">123</span></h3>
+    <h3 class="add">Working with Non-CSS Presentational Hints <span class="page-num">126</span></h3>
+    <h2>Summary <span class="page-num">126</span></h2>
+
+    <h1>5. Values and Units........ <span class="page-num">127</span></h1>
+    <h2>Keywords, Strings, and Other Text Values <span class="page-num">127</span></h2>
+    <h3>Keywords <span class="page-num">127</span></h3>
+    <h3 class="add">The all Property <span class="page-num">130</span></h3>
+    <h3>Strings <span class="page-num">131</span></h3>
+    <h3 class="change">Identifiers <span class="page-num">132</span></h3>
+    <h3>URLs <span class="page-num">132</span></h3>
+    <h3>Images <span class="page-num">134</span></h3>
+    <h2>Numbers and Percentages <span class="page-num">134</span></h2>
+    <h3>Integers <span class="page-num">135</span></h3>
+    <h3>Numbers <span class="page-num">135</span></h3>
+    <h3>Percentages <span class="page-num">135</span></h3>
+    <h3 class="add">Fractions <span class="page-num">136</span></h3>
+    <h2>Distances <span class="page-num">136</span></h2>
+    <h3>Absolute Length Units <span class="page-num">136</span></h3>
+    <h3>Resolution Units <span class="page-num">139</span></h3>
+    <h3>Relative Length Units <span class="page-num">139</span></h3>
+    <h3 class="add">Root-Relative Length Units <span class="page-num">142</span></h3>
+    <h2 class="add">Viewport-Relative Units <span class="page-num">144</span></h2>
+    <h2 class="add">Function Values <span class="page-num">146</span></h2>
+    <h3 class="add">Calculation Values <span class="page-num">148</span></h3>
+    <h3 class="add">MaximumValues <span class="page-num">149</span></h3>
+    <h3 class="add">Minimum Values <span class="page-num">150</span></h3>
+    <h3 class="add">Clamping Values <span class="page-num">150</span></h3>
+    <h3 class="change">AttributeValues <span class="page-num">151</span></h3>
+    <h2>Color <span class="page-num">151</span></h2>
+    <h3>Named Colors <span class="page-num">152</span></h3>
+    <h3 class="add">Color Keywords <span class="page-num">153</span></h3>
+    <h3>Colors by RGB and RGBa <span class="page-num">153</span></h3>
+    <h3>HSL and HSLa Colors <span class="page-num">158</span></h3>
+    <h3 class="add">Colors with HWB <span class="page-num">159</span></h3>
+    <h3 class="add">Lab Colors <span class="page-num">160</span></h3>
+    <h3 class="add">LCH Colors <span class="page-num">161</span></h3>
+    <h3 class="add">Oklab and Oklch <span class="page-num">162</span></h3>
+    <h3 class="add">Using color() <span class="page-num">162</span></h3>
+    <h3 class="add">Applying Color <span class="page-num">163</span></h3>
+    <h3 class="add">Affecting Form Elements <span class="page-num">165</span></h3>
+    <h3 class="add">Inheriting Color <span class="page-num">165</span></h3>
+    <h2 class="add">Angles <span class="page-num">166</span></h2>
+    <h2 class="add">Time and Frequency <span class="page-num">167</span></h2>
+    <h2 class="add">Ratios <span class="page-num">167</span></h2>
+    <h2 class="add">Position <span class="page-num">168</span></h2>
+    <h2 class="add">Custom Properties <span class="page-num">168</span></h2>
+    <h3 class="add">Custom Property Fallbacks <span class="page-num">171</span></h3>
+    <h2>Summary <span class="page-num">172</span></h2>
+
+    <h1>6. Basic Visual Formatting. . <span class="page-num">173</span></h1>
+    <h2>Basic Boxes <span class="page-num">173</span></h2>
+    <h3 class="change">A Quick Primer <span class="page-num">174</span></h3>
+    <h3>The Containing Block <span class="page-num">175</span></h3>
+    <h2>Altering Element Display <span class="page-num">176</span></h2>
+    <h3>Changing Roles <span class="page-num">177</span></h3>
+    <h3 class="add">Handling Block Boxes <span class="page-num">179</span></h3>
+    <h2 class="add">Logical Element Sizing <span class="page-num">181</span></h2>
+    <h3 class="add">Content-Based SizingValues <span class="page-num">183</span></h3>
+    <h3 class="add">Minimum and Maximum Logical Sizing <span class="page-num">185</span></h3>
+    <h3 class="add">Height andWidth <span class="page-num">186</span></h3>
+    <h2 class="add">Altering Box Sizing <span class="page-num">189</span></h2>
+    <h2 class="add">Block-Axis Properties <span class="page-num">190</span></h2>
+    <h3 class="add">Auto Block Sizing <span class="page-num">191</span></h3>
+    <h3 class="add">Percentage Heights <span class="page-num">192</span></h3>
+    <h3 class="add">Handling Content Overflow <span class="page-num">193</span></h3>
+    <h3 class="add">Negative Margins and Collapsing <span class="page-num">195</span></h3>
+    <h3 class="add">Collapsing Block-Axis Margins <span class="page-num">196</span></h3>
+    <h2 class="add">Inline-Axis Formatting <span class="page-num">200</span></h2>
+    <h3 class="add">Inline-Axis Properties <span class="page-num">201</span></h3>
+    <h3 class="add">Using auto <span class="page-num">202</span></h3>
+    <h3 class="add">Negative Margins <span class="page-num">205</span></h3>
+    <h3 class="add">Percentages <span class="page-num">207</span></h3>
+    <h3 class="add">Replaced Elements <span class="page-num">208</span></h3>
+    <h3 class="add">List Items <span class="page-num">209</span></h3>
+    <h2 class="add">Box Sizing with Aspect Ratios <span class="page-num">209</span></h2>
+    <h2 class="change">Inline Formatting <span class="page-num">210</span></h2>
+    <h3>Line Layout <span class="page-num">211</span></h3>
+    <h3 class="change">Basic Terms and Concepts <span class="page-num">212</span></h3>
+    <h3 class="add">Line Heights <span class="page-num">215</span></h3>
+    <h3 class="change">Inline Nonreplaced Elements <span class="page-num">215</span></h3>
+    <h3 class="change">Building the Boxes <span class="page-num">216</span></h3>
+    <h3 class="change">Setting Vertical Alignment <span class="page-num">218</span></h3>
+    <h3 class="change">Managing the Line Height <span class="page-num">220</span></h3>
+    <h3 class="change">Adding Box Properties to Nonreplaced Elements <span class="page-num">223</span></h3>
+    <h3 class="add">Changing Breaking Behavior <span class="page-num">224</span></h3>
+    <h3 class="add">GlyphsVersus ContentArea <span class="page-num">225</span></h3>
+    <h3 class="change">InlineReplacedElements <span class="page-num">226</span></h3>
+    <h3 class="add">Adding Box Properties to Replaced Elements <span class="page-num">227</span></h3>
+    <h3 class="change">Replaced Elements and theBaseline <span class="page-num">228</span></h3>
+    <h3 class="change">Inline-Block Elements <span class="page-num">229</span></h3>
+    <h3 class="change">Flow Display <span class="page-num">231</span></h3>
+    <h3 class="change">Content Display <span class="page-num">232</span></h3>
+    <h3 class="change">Other Display Values <span class="page-num">233</span></h3>
+    <h2 class="add">Element Visibility <span class="page-num">233</span></h2>
+    <h3 class="add">AnimatingVisibility <span class="page-num">234</span></h3>
+    <h2>Summary <span class="page-num">235</span></h2>
+
+    <h1>7. Padding, Borders, Outlines, and Margins<span class="page-num">237</span></h1>
+    <h2>Basic Element Boxes <span class="page-num">237</span></h2>
+    <h2>Padding <span class="page-num">238</span></h2>
+    <h3>ReplicatingValues <span class="page-num">240</span></h3>
+    <h3>Single-Side Padding <span class="page-num">242</span></h3>
+    <h3 class="add">Logical Padding <span class="page-num">243</span></h3>
+    <h3>Percentage Values and Padding <span class="page-num">245</span></h3>
+    <h3>Padding and Inline Elements <span class="page-num">247</span></h3>
+    <h3>Padding and Replaced Elements <span class="page-num">249</span></h3>
+    <h2>Borders <span class="page-num">250</span></h2>
+    <h3>Borders with Style <span class="page-num">251</span></h3>
+    <h3>BorderWidths <span class="page-num">256</span></h3>
+    <h3>Border Colors <span class="page-num">260</span></h3>
+    <h3>Single-Side Shorthand Border Properties <span class="page-num">263</span></h3>
+    <h3>Global Borders <span class="page-num">265</span></h3>
+    <h3>Borders and Inline Elements <span class="page-num">266</span></h3>
+    <h3>Rounding Border Corners <span class="page-num">267</span></h3>
+    <h3>Image Borders <span class="page-num">276</span></h3>
+    <h2>Outlines <span class="page-num">293</span></h2>
+    <h3>Outline Styles <span class="page-num">294</span></h3>
+    <h3>OutlineWidth <span class="page-num">295</span></h3>
+    <h3>Outline Color <span class="page-num">296</span></h3>
+    <h3>How They Are Different <span class="page-num">297</span></h3>
+    <h2>Margins <span class="page-num">299</span></h2>
+    <h3>Length Values and Margins <span class="page-num">300</span></h3>
+    <h3>Percentages and Margins <span class="page-num">301</span></h3>
+    <h3>Single-Side Margin Properties <span class="page-num">302</span></h3>
+    <h3>Margin Collapsing <span class="page-num">303</span></h3>
+    <h3>Negative Margins <span class="page-num">305</span></h3>
+    <h3>Margins and Inline Elements <span class="page-num">306</span></h3>
+    <h2>Summary <span class="page-num">308</span></h2>
+
+    <h1>8.Backgrounds. <span class="page-num page-change">309</span></h1>
+    <h2>Setting Background Colors <span class="page-num">309</span></h2>
+    <h3 class="add">Explicitly Setting a Transparent Background <span class="page-num">310</span></h3>
+    <h3 class="add">Background and Color Combinations <span class="page-num">311</span></h3>
+    <h2 class="add">Clipping the Background <span class="page-num">313</span></h2>
+    <h2>Working with Background Images <span class="page-num">315</span></h2>
+    <h3>Using an Image <span class="page-num">316</span></h3>
+    <h3 class="change">Understanding Why Backgrounds Aren't Inherited <span class="page-num">317</span></h3>
+    <h3 class="change">Following Good Background Practices <span class="page-num">318</span></h3>
+    <h3 class="change">Positioning Background Images <span class="page-num">319</span></h3>
+    <h3 class="add">Background Repeating (or Lack Thereof) <span class="page-num">330</span></h3>
+    <h3 class="change">Getting Attached <span class="page-num">339</span></h3>
+    <h3 class="change">Sizing Background Images <span class="page-num">343</span></h3>
+    <h3 class="change">Bringing It All Together <span class="page-num">350</span></h3>
+    <h3 class="change">Working with Multiple Backgrounds <span class="page-num">352</span></h3>
+    <h3 class="add">Using the Background Shorthand <span class="page-num">356</span></h3>
+    <h2 class="change">Creating Box Shadows <span class="page-num">357</span></h2>
+    <h2>Summary <span class="page-num">360</span></h2>
+
+    <h1 class="add">9. Gradients. <span class="page-num">361</span></h1>
+    <h2 class="add">Linear Gradients <span class="page-num">362</span></h2>
+    <h3 class="add">SettingGradientColors <span class="page-num">363</span></h3>
+    <h3 class="add">Positioning Color Stops <span class="page-num">364</span></h3>
+    <h3 class="add">Setting Color Hints <span class="page-num">369</span></h3>
+    <h3 class="add">Understanding Gradient Lines: The Gory Details <span class="page-num">371</span></h3>
+    <h3 class="add">Repeating Linear Gradients <span class="page-num">376</span></h3>
+    <h2 class="add">Radial Gradients <span class="page-num">379</span></h2>
+    <h3 class="add">Setting Shape and Size <span class="page-num">380</span></h3>
+    <h3 class="add">Positioning Radial Gradients <span class="page-num">382</span></h3>
+    <h3 class="add">Using Radial Color Stops and the Gradient Ray <span class="page-num">383</span></h3>
+    <h3 class="add">Handling Degenerate Cases <span class="page-num">388</span></h3>
+    <h3 class="add">Repeating Radial Gradients <span class="page-num">391</span></h3>
+    <h2 class="add">Conic Gradients <span class="page-num">392</span></h2>
+    <h2 class="add">Creating Conic Color Stops <span class="page-num">395</span></h2>
+    <h3 class="add">Repeating Conic Gradients <span class="page-num">397</span></h3>
+    <h2 class="add">Manipulating Gradient Images <span class="page-num">399</span></h2>
+    <h3 class="add">Creating Special Effects <span class="page-num">400</span></h3>
+    <h3 class="add">Triggering Average Gradient Colors <span class="page-num">401</span></h3>
+    <h2 class="add">Summary <span class="page-num">402</span></h2>
+
+    <h1>10. Floating and Positioning.... <span class="page-num page-change">403</span></h1>
+    <h2>Floating <span class="page-num">403</span></h2>
+    <h3>Floated Elements <span class="page-num">404</span></h3>
+    <h3>Floating: The Details <span class="page-num">406</span></h3>
+    <h3>Applied Behavior <span class="page-num">413</span></h3>
+    <h3>Floats, Content, and Overlapping <span class="page-num">417</span></h3>
+    <h2>Clearing <span class="page-num">418</span></h2>
+    <h2 class="add">Positioning <span class="page-num">422</span></h2>
+    <h3 class="add">Types of Positioning <span class="page-num">422</span></h3>
+    <h3 class="add">The Containing Block <span class="page-num">424</span></h3>
+    <h3 class="add">OffsetProperties <span class="page-num">424</span></h3>
+    <h3 class="add">Inset Shorthands <span class="page-num">427</span></h3>
+    <h3 class="add">Setting Width and Height <span class="page-num">428</span></h3>
+    <h3 class="add">Limiting Width and Height <span class="page-num">430</span></h3>
+    <h2 class="add">Absolute Positioning <span class="page-num">432</span></h2>
+    <h3 class="add">Containing Blocks and Absolutely Positioned Elements <span class="page-num">432</span></h3>
+    <h3 class="add">Placement and Sizing of Absolutely Positioned Elements <span class="page-num">435</span></h3>
+    <h3 class="add">Auto-edges <span class="page-num">436</span></h3>
+    <h3 class="add">Placing and Sizing Nonreplaced Elements <span class="page-num">437</span></h3>
+    <h3 class="add">Placing and Sizing Replaced Elements <span class="page-num">441</span></h3>
+    <h3 class="add">Placement on the Z-Axis <span class="page-num">444</span></h3>
+    <h2 class="add">Fixed Positioning <span class="page-num">449</span></h2>
+    <h2 class="add">Relative Positioning <span class="page-num">450</span></h2>
+    <h2 class="add">Sticky Positioning <span class="page-num">452</span></h2>
+    <h2>Summary <span class="page-num">456</span></h2>
+
+    <h1>11. Flexible Box Layout. <span class="page-num page-change">457</span></h1>
+    <h2>Flexbox Fundamentals <span class="page-num">457</span></h2>
+    <h3 class="change">A Simple Example <span class="page-num">459</span></h3>
+    <h2>Flex Containers <span class="page-num">462</span></h2>
+    <h3>Using the flex-direction Property <span class="page-num">462</span></h3>
+    <h3 class="add">Working with Other Writing Directions <span class="page-num">467</span></h3>
+    <h3>Wrapping Flex Lines <span class="page-num">468</span></h3>
+    <h3 class="change">Defining Flexible Flows <span class="page-num">470</span></h3>
+    <h3 class="add">Understanding Axes <span class="page-num">471</span></h3>
+    <h2 class="add">Arrangement of Flex Items <span class="page-num">474</span></h2>
+    <h2 class="add">Flex Item Alignment <span class="page-num">475</span></h2>
+    <h3 class="add">Justifying Content <span class="page-num">475</span></h3>
+    <h3 class="add">Aligning Items <span class="page-num">482</span></h3>
+    <h3 class="add">Aligning Flex Lines <span class="page-num">489</span></h3>
+    <h3 class="add">Using the place-content Property <span class="page-num">493</span></h3>
+    <h2 class="add">Opening Gaps Between Flex Items <span class="page-num">494</span></h2>
+    <h2>Flex Items <span class="page-num">498</span></h2>
+    <h3 class="change">WhatAreFlexItems? <span class="page-num">498</span></h3>
+    <h3>Flex Item Features <span class="page-num">500</span></h3>
+    <h3 class="add">Absolute Positioning <span class="page-num">501</span></h3>
+    <h3 class="add">MinimumWidths <span class="page-num">502</span></h3>
+    <h2>Flex-Item-Specific Properties <span class="page-num">503</span></h2>
+    <h3>The flex Property <span class="page-num">503</span></h3>
+    <h3>The flex-grow Property <span class="page-num">505</span></h3>
+    <h3 class="add">Growth Factors and the flex Property <span class="page-num">508</span></h3>
+    <h3>The flex-shrink Property <span class="page-num">512</span></h3>
+    <h3 class="add">The flex-basis Property <span class="page-num">522</span></h3>
+    <h3 class="add">TheflexShorthand <span class="page-num">535</span></h3>
+    <h2 class="add">The order Property <span class="page-num">541</span></h2>
+    <h3 class="add">Tabbed Navigation Revisited <span class="page-num">544</span></h3>
+    <h2>Summary <span class="page-num">546</span></h2>
+
+    <h1>12. Grid Layout. <span class="page-num page-change">547</span></h1>
+    <h2>Creating a Grid Container <span class="page-num">547</span></h2>
+    <h2>Understanding Basic Grid Terminology <span class="page-num">549</span></h2>
+    <h2>Creating Grid Lines <span class="page-num">552</span></h2>
+    <h3>Using Fixed-Width Grid Tracks <span class="page-num">554</span></h3>
+    <h3>Using Flexible Grid Tracks <span class="page-num">558</span></h3>
+    <h3 class="add">Fitting Track Contents <span class="page-num">565</span></h3>
+    <h3>Repeating Grid Tracks <span class="page-num">567</span></h3>
+    <h3 class="add">Defining Grid Areas <span class="page-num">571</span></h3>
+    <h2>Placing Elements in the Grid <span class="page-num">577</span></h2>
+    <h3>Using Column and Row Lines <span class="page-num">577</span></h3>
+    <h3>Using Row and Column Shorthands <span class="page-num">582</span></h3>
+    <h3>Working with Implicit Grid <span class="page-num">584</span></h3>
+    <h3 class="add">Handling Errors <span class="page-num">587</span></h3>
+    <h3 class="add">Using Areas <span class="page-num">588</span></h3>
+    <h3 class="add">Understanding Grid-Item Overlap <span class="page-num">590</span></h3>
+    <h2 class="add">Specifying Grid Flow <span class="page-num">591</span></h2>
+    <h2 class="add">Defining Automatic Grid Tracks <span class="page-num">597</span></h2>
+    <h2 class="add">Using the grid Shorthand <span class="page-num">599</span></h2>
+    <h2 class="add">Using Subgrids <span class="page-num">602</span></h2>
+    <h3 class="add">Defining Explicit Tracks <span class="page-num">605</span></h3>
+    <h3 class="add">Dealing with Offsets <span class="page-num">605</span></h3>
+    <h3 class="add">Naming Subgridded Lines <span class="page-num">610</span></h3>
+    <h3 class="add">Giving Subgrids Their Own Gaps <span class="page-num">612</span></h3>
+    <h3 class="remove">Opening Grid Spaces <span class="page-num">714</span></h3>
+    <h3 class="remove">Grid Gutters (or Gaps) <span class="page-num">714</span></h3>
+    <h2 class="add">Grid Items and the Box Model <span class="page-num">613</span></h2>
+    <h2 class="add">SettingAlignment in Grids <span class="page-num">618</span></h2>
+    <h3 class="add">Aligning and Justifying Individual Items <span class="page-num">619</span></h3>
+    <h3 class="add">Aligning and Justifying All Items <span class="page-num">621</span></h3>
+    <h3 class="add">Distributing Grid Items and Tracks <span class="page-num">624</span></h3>
+    <h2 class="add">Layering and Ordering <span class="page-num">626</span></h2>
+    <h2 class="remove">Aligning and Grids <span class="page-num">721</span></h2>
+    <h2>Summary <span class="page-num">628</span></h2>
+
+    <h1>13.Table Layout in CSS. <span class="page-num">629</span></h1>
+    <h2>Table Formatting <span class="page-num">629</span></h2>
+    <h3>Visually Arranging a Table <span class="page-num">629</span></h3>
+    <h3 class="change">Table Arrangement Rules <span class="page-num">630</span></h3>
+    <h3 class="change">SettingTableDisplayValues <span class="page-num">631</span></h3>
+    <h3 class="change">Inserting Anonymous Table Objects <span class="page-num">635</span></h3>
+    <h3 class="change">Working with Table Layers <span class="page-num">639</span></h3>
+    <h3 class="change">Using Captions <span class="page-num">641</span></h3>
+    <h2>Table Cell Borders <span class="page-num">642</span></h2>
+    <h3>Separated Cell Borders <span class="page-num">643</span></h3>
+    <h3>Collapsed Cell Borders <span class="page-num">646</span></h3>
+    <h2>Table Sizing <span class="page-num">650</span></h2>
+    <h3>Width <span class="page-num">650</span></h3>
+    <h3>Height <span class="page-num">656</span></h3>
+    <h3>Alignment <span class="page-num">657</span></h3>
+    <h2>Summary <span class="page-num">660</span></h2>
+
+    <h1>14. Fonts. <span class="page-num">661</span></h1>
+    <h2>Font Families <span class="page-num">661</span></h2>
+    <h3>Using Generic Font Families <span class="page-num">663</span></h3>
+    <h3 class="add">Using Quotation Marks <span class="page-num">665</span></h3>
+    <h2 class="change">Using Custom Fonts <span class="page-num">666</span></h2>
+    <h3 class="change">Using Font-Face Descriptors <span class="page-num">667</span></h3>
+    <h3 class="add">Restricting Character Range <span class="page-num">673</span></h3>
+    <h3 class="add">Working with Font Display <span class="page-num">675</span></h3>
+    <h3 class="change">Combining Descriptors <span class="page-num">677</span></h3>
+    <h2>Font Weights <span class="page-num">680</span></h2>
+    <h3>How Weights Work <span class="page-num">682</span></h3>
+    <h3 class="add">The font-weight Descriptor <span class="page-num">685</span></h3>
+    <h2>Font Size <span class="page-num">686</span></h2>
+    <h3>Using Absolute Sizes <span class="page-num">687</span></h3>
+    <h3>Using Relative Sizes <span class="page-num">689</span></h3>
+    <h3>Setting Sizes as Percentages <span class="page-num">690</span></h3>
+    <h3 class="change">Automatically Adjusting Size <span class="page-num">691</span></h3>
+    <h2>Font Style <span class="page-num">695</span></h2>
+    <h3 class="add">The font-style Descriptor <span class="page-num">697</span></h3>
+    <h2>Font Stretching <span class="page-num">698</span></h2>
+    <h3 class="add">The font-stretch Descriptor <span class="page-num">700</span></h3>
+    <h2>Font Synthesis <span class="page-num">702</span></h2>
+    <h2>FontVariants <span class="page-num">703</span></h2>
+    <h3 class="add">Capital Font Variants <span class="page-num">705</span></h3>
+    <h3 class="add">NumericFontVariants <span class="page-num">707</span></h3>
+    <h3 class="add">Ligature Variants <span class="page-num">709</span></h3>
+    <h3 class="add">AlternateVariants <span class="page-num">711</span></h3>
+    <h3 class="add">EastAsianFontVariants <span class="page-num">713</span></h3>
+    <h3 class="add">Font Variant Position <span class="page-num">713</span></h3>
+    <h2 class="change">Font Feature Settings <span class="page-num">714</span></h2>
+    <h3 class="add">The font-feature-settings Descriptor <span class="page-num">717</span></h3>
+    <h2 class="add">Font Variation Settings <span class="page-num">718</span></h2>
+    <h2 class="add">Font Optical Sizing <span class="page-num">719</span></h2>
+    <h2 class="add">Override Descriptors <span class="page-num">720</span></h2>
+    <h2>Font Kerning <span class="page-num">721</span></h2>
+    <h2>The font Property <span class="page-num">722</span></h2>
+    <h3 class="add">Understanding font Property Limitations <span class="page-num">724</span></h3>
+    <h3>Adding the Line Height <span class="page-num">724</span></h3>
+    <h3 class="change">Using the ShorthandProperly <span class="page-num">725</span></h3>
+    <h3>Using System Fonts <span class="page-num">726</span></h3>
+    <h2>Font Matching <span class="page-num">727</span></h2>
+    <h2>Summary <span class="page-num">729</span></h2>
+
+    <h1>15. Text Properties.... <span class="page-num">731</span></h1>
+    <h2 class="change">Indentation andInline Alignment <span class="page-num">731</span></h2>
+    <h3 class="change">Indenting Text <span class="page-num">732</span></h3>
+    <h3 class="change">Aligning Text <span class="page-num">734</span></h3>
+    <h3 class="change">Aligning the Last Line <span class="page-num">738</span></h3>
+    <h3 class="add">Word Spacing <span class="page-num">739</span></h3>
+    <h3 class="add">Letter Spacing <span class="page-num">741</span></h3>
+    <h3 class="add">Spacing and Alignment <span class="page-num">742</span></h3>
+    <h2 class="change">Vertical Alignment <span class="page-num">742</span></h2>
+    <h3 class="change">Adjusting the Height of Lines <span class="page-num">743</span></h3>
+    <h3 class="change">Vertically Aligning Text <span class="page-num">746</span></h3>
+    <h2>Text Transformation <span class="page-num">751</span></h2>
+    <h2 class="change">Text Decoration <span class="page-num">754</span></h2>
+    <h3 class="add">Setting Text Decoration Line Placement <span class="page-num">754</span></h3>
+    <h3 class="add">Setting Text Decoration Color <span class="page-num">756</span></h3>
+    <h3 class="add">Setting Text Decoration Thickness <span class="page-num">756</span></h3>
+    <h3 class="add">Setting Text Decoration Style <span class="page-num">757</span></h3>
+    <h3 class="add">Using the Text Decoration Shorthand Property <span class="page-num">758</span></h3>
+    <h3 class="add">OffsettingUnderlines <span class="page-num">759</span></h3>
+    <h3 class="add">Skipping Ink <span class="page-num">761</span></h3>
+    <h3 class="add">Understanding Weird Decorations <span class="page-num">762</span></h3>
+    <h2 class="add">Text Rendering <span class="page-num">764</span></h2>
+    <h2 class="change">Text Shadows <span class="page-num">765</span></h2>
+    <h2 class="add">Text Emphasis <span class="page-num">767</span></h2>
+    <h3 class="add">Setting Emphasis Style <span class="page-num">767</span></h3>
+    <h3 class="add">Changing Emphasis Color <span class="page-num">769</span></h3>
+    <h3 class="add">Placing Emphasis Marks <span class="page-num">770</span></h3>
+    <h3 class="add">Using the text-emphasis Shorthand <span class="page-num">771</span></h3>
+    <h3 class="add">Setting Text Drawing Order <span class="page-num">771</span></h3>
+    <h2 class="change">Whitespace <span class="page-num">772</span></h2>
+    <h3 class="add">Setting TabSizes <span class="page-num">775</span></h3>
+    <h2 class="change">Wrapping and Hyphenation <span class="page-num">776</span></h2>
+    <h3 class="add">Hyphenation <span class="page-num">776</span></h3>
+    <h3 class="add">Word Breaking <span class="page-num">778</span></h3>
+    <h3 class="add">Line Breaking <span class="page-num">780</span></h3>
+    <h3 class="change">Wrapping Text <span class="page-num">781</span></h3>
+    <h2 class="change">Writing Modes <span class="page-num">783</span></h2>
+    <h3 class="change">Setting Writing Modes <span class="page-num">783</span></h3>
+    <h3 class="change">Changing Text Orientation <span class="page-num">784</span></h3>
+    <h3 class="add">Combining Characters <span class="page-num">786</span></h3>
+    <h3 class="change">Declaring Direction <span class="page-num">788</span></h3>
+    <h2>Summary <span class="page-num">790</span></h2>
+
+    <h1>16.Lists and Generated Content. <span class="page-num">791</span></h1>
+    <h2 class="change">Working with Lists <span class="page-num">791</span></h2>
+    <h3 class="change">Types of Lists <span class="page-num">792</span></h3>
+    <h3 class="change">List-Item Images <span class="page-num">795</span></h3>
+    <h3 class="change">List-Marker Positions <span class="page-num">798</span></h3>
+    <h3 class="change">List Styles inShorthand <span class="page-num">799</span></h3>
+    <h3 class="change">List Layout <span class="page-num">800</span></h3>
+    <h3 class="change">The ::marker Pseudo-Element <span class="page-num">802</span></h3>
+    <h2 class="change">Creating Generated Content <span class="page-num">804</span></h2>
+    <h3 class="change">Inserting Generated Content <span class="page-num">804</span></h3>
+    <h3 class="change">Specifying Content <span class="page-num">807</span></h3>
+    <h3 class="change">Defining Counters <span class="page-num">812</span></h3>
+    <h2 class="change">Defining Counting Patterns <span class="page-num">819</span></h2>
+    <h3 class="change">Fixed Counting Patterns <span class="page-num">821</span></h3>
+    <h3 class="change">Cyclic Counting Patterns <span class="page-num">823</span></h3>
+    <h3 class="change">Symbolic Counting Patterns <span class="page-num">826</span></h3>
+    <h3 class="change">Alphabetic Counting Patterns <span class="page-num">829</span></h3>
+    <h3 class="change">Numeric Counting Patterns <span class="page-num">830</span></h3>
+    <h3 class="change">Additive Counting Patterns <span class="page-num">834</span></h3>
+    <h3 class="change">Extending Counting Patterns <span class="page-num">836</span></h3>
+    <h3 class="change">Speaking Counting Patterns <span class="page-num">838</span></h3>
+    <h2>Summary <span class="page-num">840</span></h2>
+
+    <h1>17. Transforms. <span class="page-num">841</span></h1>
+    <h2>Coordinate Systems <span class="page-num">841</span></h2>
+    <h2>Transforming <span class="page-num">845</span></h2>
+    <h2 class="change">The Transform Functions <span class="page-num">848</span></h2>
+    <h3 class="change">Translation <span class="page-num">848</span></h3>
+    <h3 class="change">Scaling <span class="page-num">851</span></h3>
+    <h3 class="add">ElementRotation <span class="page-num">854</span></h3>
+    <h3 class="add">Individual Transform Property Order <span class="page-num">859</span></h3>
+    <h3 class="add">Skewing <span class="page-num">860</span></h3>
+    <h3 class="change">Matrix Functions <span class="page-num">861</span></h3>
+    <h3 class="add">Setting Element Perspective <span class="page-num">864</span></h3>
+    <h2 class="change">More Transform Properties <span class="page-num">866</span></h2>
+    <h3 class="change">Moving the Transform's Origin <span class="page-num">866</span></h3>
+    <h3 class="add">Choosing the Transform's Box <span class="page-num">869</span></h3>
+    <h3 class="change">Choosing a 3D Style <span class="page-num">870</span></h3>
+    <h3 class="change">Changing Perspective <span class="page-num">873</span></h3>
+    <h3 class="change">Dealing with Backfaces <span class="page-num">876</span></h3>
+    <h2>Summary <span class="page-num">878</span></h2>
+
+    <h1>18. Transitions....... <span class="page-num">879</span></h1>
+    <h2>CSS Transitions <span class="page-num">879</span></h2>
+    <h2>Transition Properties <span class="page-num">881</span></h2>
+    <h3 class="change">Limiting Transition Effects by Property <span class="page-num">885</span></h3>
+    <h3 class="change">Setting Transition Duration <span class="page-num">890</span></h3>
+    <h3 class="change">Altering the Internal Timing of Transitions <span class="page-num">892</span></h3>
+    <h3 class="change">Delaying Transitions <span class="page-num">898</span></h3>
+    <h3 class="change">Using the transition Shorthand <span class="page-num">901</span></h3>
+    <h3 class="change">Reversing Interrupted Transitions <span class="page-num">903</span></h3>
+    <h2 class="change">Animatable Properties and Values <span class="page-num">904</span></h2>
+    <h3 class="change">How Property Values Are Interpolated <span class="page-num">905</span></h3>
+    <h3 class="add">Interpolating Repeating Values <span class="page-num">906</span></h3>
+    <h2 class="change">Printing Transitions <span class="page-num">908</span></h2>
+    <h2>Summary <span class="page-num">909</span></h2>
+
+    <h1 class="add">19.Animation. <span class="page-num">911</span></h1>
+    <h2 class="add">Accommodating Seizure and Vestibular Disorders <span class="page-num">912</span></h2>
+    <h2 class="add">Defining Keyframes <span class="page-num">912</span></h2>
+    <h2 class="add">Setting Up Keyframe Animations <span class="page-num">914</span></h2>
+    <h2 class="add">Defining Keyframe Selectors <span class="page-num">915</span></h2>
+    <h3 class="add">Omitting from and toValues <span class="page-num">916</span></h3>
+    <h3 class="add">Repeating Keyframe Properties <span class="page-num">917</span></h3>
+    <h3 class="add">Animatable Properties <span class="page-num">917</span></h3>
+    <h3 class="add">Using Nonanimatable Properties That Aren't Ignored <span class="page-num">918</span></h3>
+    <h3 class="add">Scripting @keyframes Animations <span class="page-num">919</span></h3>
+    <h2 class="add">Animating Elements <span class="page-num">920</span></h2>
+    <h3 class="add">Invoking a Named Animation <span class="page-num">920</span></h3>
+    <h3 class="add">Defining Animation Lengths <span class="page-num">922</span></h3>
+    <h3 class="add">Declaring Animation Iterations <span class="page-num">924</span></h3>
+    <h3 class="add">Setting an Animation Direction <span class="page-num">925</span></h3>
+    <h3 class="add">Delaying Animations <span class="page-num">927</span></h3>
+    <h3 class="add">Exploring Animation Events <span class="page-num">929</span></h3>
+    <h3 class="add">Changing the Internal Timing of Animations <span class="page-num">937</span></h3>
+    <h3 class="add">Setting the Animation PlayState <span class="page-num">947</span></h3>
+    <h3 class="add">Animation Fill Modes <span class="page-num">948</span></h3>
+    <h2 class="add">Bringing It All Together <span class="page-num">950</span></h2>
+    <h2 class="add">Animation, Specificity, and Precedence Order <span class="page-num">953</span></h2>
+    <h3 class="add">Specificity and!important <span class="page-num">953</span></h3>
+    <h3 class="add">AnimationIteration and display: none; <span class="page-num">953</span></h3>
+    <h3 class="add">Animation and the UI Thread <span class="page-num">953</span></h3>
+    <h2 class="add">Using the will-change Property <span class="page-num">954</span></h2>
+    <h2 class="add">Printing Animations <span class="page-num">955</span></h2>
+    <h2>Summary <span class="page-num">956</span></h2>
+
+    <h1 class="add">20.Filters,Blending,Clipping,and Masking <span class="page-num">957</span></h1>
+    <h2 class="add">CSS Filters <span class="page-num">957</span></h2>
+    <h3 class="add">Basic Filters <span class="page-num">958</span></h3>
+    <h3 class="add">Color Filtering <span class="page-num">960</span></h3>
+    <h3 class="add">Brightness, Contrast, and Saturation <span class="page-num">961</span></h3>
+    <h3 class="add">SVGFilters <span class="page-num">962</span></h3>
+    <h2 class="add">Compositing and Blending <span class="page-num">963</span></h2>
+    <h3 class="add">Blending Elements <span class="page-num">964</span></h3>
+    <h3 class="add">Blending Backgrounds <span class="page-num">972</span></h3>
+    <h3 class="add">Blending in Isolation <span class="page-num">974</span></h3>
+    <h2 class="add">Containing Elements <span class="page-num">976</span></h2>
+    <h2 class="change">Float Shapes <span class="page-num">979</span></h2>
+    <h3 class="change">Shaping with Image Transparency <span class="page-num">981</span></h3>
+    <h3 class="change">Using Inset Shapes <span class="page-num">982</span></h3>
+    <h3 class="change">Adding a Shape Margin <span class="page-num">992</span></h3>
+    <h2 class="add">Clipping and Masking <span class="page-num">994</span></h2>
+    <h3 class="add">Clipping <span class="page-num">994</span></h3>
+    <h3 class="add">Clip Shapes <span class="page-num">995</span></h3>
+    <h3 class="add">Clip Boxes <span class="page-num">997</span></h3>
+    <h3 class="add">Clipping with SVG Paths <span class="page-num">999</span></h3>
+    <h2 class="add">Masks <span class="page-num">1000</span></h2>
+    <h3 class="add">Defining a Mask <span class="page-num">1000</span></h3>
+    <h3 class="add">Changing the Mask's Mode <span class="page-num">1003</span></h3>
+    <h3 class="add">Sizing and Repeating Masks <span class="page-num">1005</span></h3>
+    <h3 class="add">Positioning Masks <span class="page-num">1008</span></h3>
+    <h3 class="add">Clipping and Compositing Masks <span class="page-num">1009</span></h3>
+    <h3 class="add">Bringing It All Together <span class="page-num">1012</span></h3>
+    <h3 class="add">Setting Mask Types <span class="page-num">1013</span></h3>
+    <h3 class="add">Border-Image Masking <span class="page-num">1014</span></h3>
+    <h2 class="add">Object Fitting and Positioning <span class="page-num">1020</span></h2>
+    <h2>Summary <span class="page-num">1023</span></h2>
+
+    <h1 class="add">21. CSS At-Rules. <span class="page-num">1025</span></h1>
+    <h2 class="add change">Media Queries <span class="page-num">1025</span></h2>
+    <h3 class="add change">BasicMedia Queries <span class="page-num">1025</span></h3>
+    <h3 class="add change">Complex Media Queries <span class="page-num">1028</span></h3>
+    <h3 class="add change">Special Value Types <span class="page-num">1030</span></h3>
+    <h3 class="add change">Keyword MediaFeatures <span class="page-num">1031</span></h3>
+    <h3 class="add change">Forced Colors, Contrast, and Display Mode <span class="page-num">1035</span></h3>
+    <h3 class="add change">Ranged Media Features <span class="page-num">1038</span></h3>
+    <h3 class="add change">Deprecated MediaFeatures <span class="page-num">1040</span></h3>
+    <h3 class="add change">Responsive Styling <span class="page-num">1041</span></h3>
+    <h2 class="add change">Paged Media <span class="page-num">1043</span></h2>
+    <h3 class="add change">Print Styles <span class="page-num">1043</span></h3>
+    <h3 class="add change">Differences Between Screen and Print <span class="page-num">1043</span></h3>
+    <h3 class="add change">Page Size <span class="page-num">1045</span></h3>
+    <h3 class="add change">Page Margins and Padding <span class="page-num">1048</span></h3>
+    <h3 class="add change">Named Page Types <span class="page-num">1048</span></h3>
+    <h3 class="add change">Page Breaking <span class="page-num">1049</span></h3>
+    <h3 class="add change">Orphans and Widows <span class="page-num">1052</span></h3>
+    <h3 class="add change">Page-Breaking Behavior <span class="page-num">1054</span></h3>
+    <h3 class="add change">Repeated Elements <span class="page-num">1056</span></h3>
+    <h3 class="add change">Elements Outside the Page <span class="page-num">1057</span></h3>
+    <h2 class="add">Container Queries <span class="page-num">1057</span></h2>
+    <h3 class="add">Defining Container Types <span class="page-num">1058</span></h3>
+    <h3 class="add">Defining Container Names <span class="page-num">1060</span></h3>
+    <h3 class="add">Using Container Shorthand <span class="page-num">1061</span></h3>
+    <h3 class="add">Using Container At-Rules <span class="page-num">1062</span></h3>
+    <h3 class="add">Defining Container Query Features <span class="page-num">1065</span></h3>
+    <h3 class="add">Setting Container Length Units <span class="page-num">1066</span></h3>
+    <h2 class="add">Feature Queries (@supports) <span class="page-num">1067</span></h2>
+    <h2 class="add">OtherAt-Rules <span class="page-num">1070</span></h2>
+    <h3 class="add">Defining a Character Set for a Stylesheet <span class="page-num">1070</span></h3>
+    <h3 class="add">Defining a Namespace for Selectors <span class="page-num">1071</span></h3>
+    <h2>Summary <span class="page-num">1071</span></h2>
+
+    <h1>A. Additional Resources. <span class="page-num">1073</span></h1>
+    <h2>Index... <span class="page-num">1075</span></h2>
+</div>
+</body>
+</html>

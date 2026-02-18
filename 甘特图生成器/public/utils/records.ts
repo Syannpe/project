@@ -22,73 +22,31 @@ import Finished from "../decorators/Finished.js";
 
 // 复现代码研究创新点，JS（框架，算法，面经），病情补助，银行卡办理，轮讲，
 
-
 const task1 = new Task(
-    "1",
-    "复现代码研究创新点",
-    new Date("2025-12-18"),
-    new Date("2026-1-3"),
-    new Date("2025-12-18"),
-    new Date("2026-1-3"),
-    .7,
-    function (date: Date, dayNumber: number) {
-        return date.getDay() !== 0 && date.getDay() !== 6;
-    }
+    "修身",
+    1,
+    new Date("2026-1-16"),
+    new Date("2026-1-31"),
+    null,
+    null,
+    null
 );
-
-
 const task2 = new Task(
-    "2",
-    "JS（框架，算法，面经）",
-    new Date("2025-12-18"),
-    new Date("2026-1-3"),
-    new Date("2025-12-18"),
-    new Date("2026-1-3"),
-    .2,
-    function (date: Date, dayNumber: number) {
-        return date.getDay() !== 0 && date.getDay() !== 6;
-    }
+    "论文/复现",
+    .5,
+    new Date("2026-1-16"),
+    .
+    new Date("2026-1-31")
 );
 const task3 = new Task(
-    "3",
-    "轮讲",
-    new Date("2025-12-21"),
-    new Date("2025-12-24"),
-    new Date("2025-12-21"),
-    new Date("2025-12-24"),
-    .8,
-    null);
-
-const task4 = new Task(
-    "4",
-    "病情补助",
-    new Date("2026-1-2"),
-    new Date("2026-1-3"),
-    new Date("2026-1-2"),
-    new Date("2026-1-3"),
-    .5,
-    function (date: Date, dayNumber: number) {
-        return dayNumber % 2 === 0;
-    }
+    "技术",
+    .4,
+    new Date("2026-1-16"),
+    new Date("2026-1-31")
 );
-const task5 = new Task(
-    "5",
-    "银行卡办理",
-    new Date("2025-12-18"),
-    new Date("2025-12-18"),
-    new Date("2025-12-18"),
-    new Date("2025-12-18"),
-    .3,
-    function (date: Date, dayNumber: number) {
-        // return dayNumber % 5 !== 2 && dayNumber % 5 !== 1;
-        return dayNumber % 2 !== 0;
-    });
-
 
 export const records: Array<(Command | Decorator)[]> = [
     [new Linear(task1)],
     [new Linear(task2)],
-    [new Linear(task3)],
-    [new Linear(task4)],
-    [new Linear(task5)]
+    [new Linear(task3)]
 ];

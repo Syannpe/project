@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        pre {
+            font-size: 29px;
+        }
+    </style>
+</head>
+<body>
+<audio src="1.mp3" autoplay controls></audio><br />
+<label>声音扩大：0<input type="range" min="0" max="10" id="gain-controller" step="0.01"/>10</label>
+<output id="output"></output><br />
+<button id="download">下载</button>
+<audio id="test-output"></audio>
+<script type="text/javascript">
+    document.addEventListener("DOMContentLoaded", async function () {
+        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        const myAudio = document.querySelector('audio');
+        const output = document.querySelector("#output");
+        const gainController = document.querySelector("#gain-controller");
+        const download = document.querySelector("#download");
+
+        // 等待音频加载完成
+        await new Promise(resolve => myAudio.onloadeddata = resolve);
+
+        // 创建音频处理链路
+        const source = audioCtx.createMediaElementSource(myAudio);
+        const gainNode = audioCtx.createGain();
+        const streamDest = audioCtx.createMediaStreamDestination();
+
+        source.connect(gainNode);
+        gainNode.connect(streamDest);
+        gainNode.connect(audioCtx.destination)
+        // 增益控制
+        let gainParam = 1;
+        gainController.value = gainParam;
+        output.value = gainParam;
+        gainNode.gain.value = gainParam;
+
+        gainController.oninput = function () {
+            gainParam = this.value;
+            gainController.value = gainParam;
+            output.value = gainParam;
+            gainNode.gain.value = gainParam;
+        };
+
+        // 下载按钮点击事件
+        download.onclick = function () {
+            // 重置音频到开头
+            myAudio.currentTime = 0;
+
+            // 准备录制
+            const recordedChunks = [];
+            const mediaRecorder = new MediaRecorder(streamDest.stream, {
+                mimeType: 'audio/webm'  // 音频格式，不是video/mp4
+            });
+
+            mediaRecorder.ondataavailable = function (e) {
+                if (e.data.size > 0) {
+                    recordedChunks.push(e.data);
+                }
+            };
+
+            mediaRecorder.onstop = function () {
+                // 音频播放完成，创建Blob并下载
+                const blob = new Blob(recordedChunks, { type: 'audio/webm' });
+                const url = URL.createObjectURL(blob);
+
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = `processed-audio-${Date.now()}.webm`;
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+
+                URL.revokeObjectURL(url);
+
+                // 恢复按钮状态
+                download.disabled = false;
+                download.textContent = '下载';
+            };
+
+            // 开始录制
+            mediaRecorder.start();
+
+            // 开始播放音频
+            myAudio.play();
+
+            // 禁用下载按钮，防止重复点击
+            download.disabled = true;
+            download.textContent = '录制中...';
+
+            // 音频播放完成时停止录制
+            myAudio.onended = function () {
+                mediaRecorder.stop();
+                // 重置音频
+                myAudio.pause();
+                myAudio.currentTime = 0;
+            };
+        };
+    });
+</script>
+</body>
+</html>

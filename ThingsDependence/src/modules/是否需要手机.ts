@@ -30,6 +30,10 @@ class 蓝牙耳机 extends TreeNode {
     name = this.constructor.name;
 }
 
+class 卡针 extends TreeNode {
+    name = this.constructor.name;
+}
+
 class 是否需要手机 extends TreeNode {
     name = this.constructor.name;
     children: TreeNode[] = [];
@@ -41,6 +45,7 @@ class 是否需要手机 extends TreeNode {
         this.children.push(new 充电宝());
         this.children.push(new 有线耳机());
         this.children.push(new 蓝牙耳机());
+        this.children.push(new 卡针());
     }
 }
 
@@ -49,5 +54,6 @@ export {
     手机充电器,
     充电宝,
     有线耳机,
-    蓝牙耳机
+    蓝牙耳机,
+    卡针
 }

@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+  .arrow-line {
+    position: absolute;
+    background: #ff4444;
+    transform-origin: left center;
+    pointer-events: none;
+    z-index: 9999;
+  }
+
+  .arrow-head {
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-left: 10px solid #ff4444;
+    border-top: 7px solid transparent;
+    border-bottom: 7px solid transparent;
+    pointer-events: none;
+    z-index: 9999;
+  }
+
+  .box {
+    width: 100px;
+    height: 100px;
+    background: #f0f0f0;
+    border: 2px solid #333;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    cursor: pointer;
+    transition: all 0.3s;
+  }
+
+  .box:hover {
+    border-color: #ff4444;
+    transform: scale(1.05);
+  }
+</style>
+</head>
+<body>
+
+<div id="container" style="position: relative; width: 600px; height: 400px; border: 1px dashed #ccc;">
+  <div class="box" id="box1" style="left: 50px; top: 50px;">元素A</div>
+  <div class="box" id="box2" style="left: 400px; top: 250px;">元素B</div>
+
+  <button onclick="drawArrow('box1', 'box2')" style="position: absolute; top: 10px; left: 10px;">画箭头</button>
+  <button onclick="clearArrows()" style="position: absolute; top: 10px; left: 120px;">清除箭头</button>
+</div>
+
+<script>
+class ArrowDrawer {
+  constructor(container) {
+    this.container = container;
+    this.arrows = [];
+  }
+
+  /**
+   * 计算并绘制两个元素间的箭头
+   */
+  drawArrow(fromId, toId, options = {}) {
+    const fromElem = document.getElementById(fromId);
+    const toElem = document.getElementById(toId);
+
+    if (!fromElem || !toElem) {
+      console.error('元素不存在');
+      return;
+    }
+
+    // 获取元素中心坐标（相对于容器）
+    const containerRect = this.container.getBoundingClientRect();
+    const fromRect = fromElem.getBoundingClientRect();
+    const toRect = toElem.getBoundingClientRect();
+
+    const fromX = fromRect.left + fromRect.width / 2 - containerRect.left;
+    const fromY = fromRect.top + fromRect.height / 2 - containerRect.top;
+    const toX = toRect.left + toRect.width / 2 - containerRect.left;
+    const toY = toRect.top + toRect.height / 2 - containerRect.top;
+
+    // 计算距离和角度
+    const dx = toX - fromX;
+    const dy = toY - fromY;
+    const distance = Math.sqrt(dx * dx + dy * dy);
+    const angle = Math.atan2(dy, dx) * 180 / Math.PI;
+
+    // 箭头头部大小（用于缩短线条）
+    const arrowHeadSize = 10;
+    const lineLength = distance - arrowHeadSize;
+
+    // 创建线条
+    const line = document.createElement('div');
+    line.className = 'arrow-line';
+    line.style.width = `${lineLength}px`;
+    line.style.height = `${options.strokeWidth || 2}px`;
+    line.style.left = `${fromX}px`;
+    line.style.top = `${fromY}px`;
+    line.style.transform = `rotate(${angle}deg)`;
+
+    // 创建箭头头部
+    const head = document.createElement('div');
+    head.className = 'arrow-head';
+    head.style.left = `${toX - arrowHeadSize}px`;
+    head.style.top = `${toY - 7}px`;
+    head.style.transform = `rotate(${angle}deg)`;
+
+    // 添加到容器
+    this.container.appendChild(line);
+    this.container.appendChild(head);
+
+    // 保存引用以便后续清除
+    this.arrows.push(line, head);
+  }
+
+  /**
+   * 清除所有箭头
+   */
+  clearArrows() {
+    this.arrows.forEach(elem => elem.remove());
+    this.arrows = [];
+  }
+}
+
+// 使用示例
+const drawer = new ArrowDrawer(document.getElementById('container'));
+
+function drawArrow(from, to) {
+  drawer.drawArrow(from, to, {
+    strokeWidth: 3,
+    color: '#ff4444'
+  });
+}
+
+function clearArrows() {
+  drawer.clearArrows();
+}
+
+// 自动绘制示例
+window.addEventListener('load', () => {
+  setTimeout(() => drawArrow('box1', 'box2'), 500);
+});
+</script>
+
+</body>
+</html>
