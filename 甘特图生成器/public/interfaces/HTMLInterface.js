@@ -16,6 +16,7 @@ class HTMLInterface {
     important;
     after;
     finished;
+    optional;
     // 自定义绘制方法
     handleImportant() {
     }
@@ -119,11 +120,13 @@ class HTMLInterface {
                         td.className = "half-colored";
                         options && options.important && options.important === true && td.classList.add("important");
                         options && options.finished && options.finished === true && td.classList.add("finished");
+                        options && options.optional && options.optional === true && td.classList.add("optional");
                         break;
                     case TableCellStatus.FULL:
                         td.className = "colored";
                         options && options.important && options.important === true && td.classList.add("important");
                         options && options.finished && options.finished === true && td.classList.add("finished");
+                        options && options.optional && options.optional === true && td.classList.add("optional");
                         if (typeof proportion === "number") {
                             if (Number.isNaN(proportion)) {
                                 td.innerText = "?%";

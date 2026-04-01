@@ -26,10 +26,11 @@ export default class Task {
         if (!this.lateEnd) this.lateEnd = this.earlyEnd;
 
         this.id = ++Task.id;
-        const r = Math.floor(Math.random() * 128) + 128;
-        const g = Math.floor(Math.random() * 128) + 128;
-        const b = Math.floor(Math.random() * 128) + 128;
+        const r = Math.floor(Math.random() * 100) + 128;
+        const g = Math.floor(Math.random() * 100) + 128;
+        const b = Math.floor(Math.random() * 100) + 128;
 
         this.color = `rgb(${r}, ${g}, ${b})`;
+
     }
 }

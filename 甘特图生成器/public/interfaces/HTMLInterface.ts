@@ -19,6 +19,7 @@ class HTMLInterface {
     public important: boolean;
     public after: Task;
     public finished: boolean;
+    public optional: boolean;
 
     // 自定义绘制方法
     private handleImportant(): void {
@@ -138,12 +139,14 @@ class HTMLInterface {
 
                         options && options.important && options.important === true && td.classList.add("important");
                         options && options.finished && options.finished === true && td.classList.add("finished");
+                        options && options.optional && options.optional === true && td.classList.add("optional");
                         break;
                     case TableCellStatus.FULL:
                         td.className = "colored";
 
                         options && options.important && options.important === true && td.classList.add("important");
                         options && options.finished && options.finished === true && td.classList.add("finished");
+                        options && options.optional && options.optional === true && td.classList.add("optional");
 
                         if (typeof proportion === "number") {
                             if (Number.isNaN(proportion)) {

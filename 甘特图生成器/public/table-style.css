@@ -161,3 +161,10 @@ table.task tr:has(td:is(.colored, .half-colored).finished) > td::after {
     height: 4px;
     background-color: #444;
 }
+
+
+table.task tr:has(td:is(.colored, .half-colored).optional) > :is(td.colored, td.half-colored) {
+    outline: dashed var(--background-color) 2px;
+    background-color: #f000;
+    color: var(--background-color)
+}
